@@ -2,20 +2,20 @@
 
 <div id="agent-view">
   <div class="container-fluid">
-    <div class="panel panel-default col-md-6" id="panel-container">
+    <div class="panel panel-default col-md-12" id="panel-container">
       <div class="panel-heading">
-        <div class="row">
-          <div class="col-md-12 right">
 
+        <div class="row">
+          <div class="col-md-6">
+            <strong>Listing Prospects</strong>
+          </div>
+          
+          <div class="col-md-6 right">
               <div class="form-group">
                 <%= link_to "Export CSV", prospects_path(format: "csv"), class: 'btn btn-primary gradient round raised btn-xs' %>
               </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <strong>Listing Prospects</strong>
-          </div>
+          
         </div>
       </div>
       <div class="container-fluid">
@@ -24,34 +24,29 @@
           <table border="1" width="100%">
             <tr background="black">
               <th>UserID</th><th>Campaign</th><th>List#</th><th>Company</th>
-              <!--<th>Co Phone</th><th>City</th><th>State</th><th>Full Name</th><th>Title</th>-->
-              <th colspan="3">Show/ Edit / Delete</th>
+              <th>Co Phone</th><th>City</th><th>State</th><th>Full Name</th><th>Title</th>
+              <th colspan="2"></th>
             </tr>
             
             <% @prospects.each do |p| %>
             <tr>
-              <td><%= p.user_id %></td><td><%= p.campaign %></td><td><%= p.list_number %></td><td><%= p.company %></td>
+              <td><%= p.user_id %></td><td><%= p.campaign %></td><td><%= p.list_number %></td><td><%= link_to p.company, p %></td>
 
-              <!--<td><%= p.company_phone %></td><td><%= p.city %></td><td><%= p.state %></td><td><%= p.first_name %> <%= p.last_name %></td><td><%= p.title %></td>-->
+              <td><%= p.company_phone %></td><td><%= p.city %></td><td><%= p.state %></td><td><%= p.first_name %> <%= p.last_name %></td><td><%= p.title %></td>
 
-              <td><%= link_to 'Show', p, class: "btn btn-default btn-xs" %></td>
-              <td><%= link_to "Edit", edit_prospect_path(p), class: "btn btn-warning btn-xs" %></td>
-              <td><%= link_to "Delete", p, method: :delete, data: { confirm: 'Are you sure?'}, class: "btn btn-danger btn-xs" %></td>
+              <td><%= link_to "Edit", edit_prospect_path(p) %></td>
+              <td><%= link_to "Delete", p, method: :delete, data: { confirm: 'Are you sure?'} %></td>
             </tr>
             <% end %>
           </table>
         </div>
         
-        <div class="row center">
-          <%= paginate @prospects %>
-        </div>
+
         
       </div>
       
       <div class="panel-footer">
-        <div class="btn-toolbar">
-          <%= link_to 'New Prospect', new_prospect_path, class: "btn btn-primary gradient round raised btn-block" %>
-        </div>
+        <div class="row center"><%= paginate @prospects %></div>
       </div>
     </div>
   </div>

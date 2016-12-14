@@ -9,17 +9,17 @@ class ProspectsController < ApplicationController
     
     # Following 3 lines for serching by street name
     if params[:loc] != nil
-      @prospects = Prospect.lookup(params[:loc]).page(params[:page]).per(10) 
+      @prospects = Prospect.search_for_street(params[:loc]).page(params[:page]).per(10) 
     end 
 
     # Following 3 lines for serching by company name
     if params[:co] != nil
-      @prospects = Prospect.search(params[:co]).page(params[:page]).per(10)
-    end
- 
-     # Following 3 lines for serching by company_phone
+      @prospects = Prospect.search_for_company(params[:co]).page(params[:page]).per(10)
+    end 
+
+    # Following 3 lines for serching by company_phone
     if params[:phon] != nil
-      @prospects = Prospect.search(params[:phon]).page(params[:page]).per(10)
+      @prospects = Prospect.search_for_phone(params[:phon]).page(params[:page]).per(10)
     end
  
     # Following 4 lines selecting by list number

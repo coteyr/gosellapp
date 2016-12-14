@@ -7,7 +7,7 @@ class Prospect < ApplicationRecord
   validates :company, presence: true
 
 # the following 7 lines for searching by company name
-  def self.search(co)
+  def self.search_for_company(co)
     if co
       where('company LIKE ?', "%#{co}%")
     else
@@ -16,7 +16,7 @@ class Prospect < ApplicationRecord
   end
 
 # the following 7 lines for searching by company_phone
-  def self.search(phon)
+  def self.search_for_phone(phon)
     if phon
       where('company_phone LIKE ?', "%#{phon}%")
     else
@@ -25,7 +25,7 @@ class Prospect < ApplicationRecord
   end
 
 # the following 7 lines for searching by street name
-  def self.lookup(loc)
+  def self.search_for_street(loc)
     if loc
       where('address LIKE ?', "%#{loc}%")
     else

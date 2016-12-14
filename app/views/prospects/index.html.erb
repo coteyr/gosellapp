@@ -6,17 +6,10 @@
       <div class="panel-heading">
         <div class="row">
           <div class="col-md-12 right">
-            <%= form_tag import_prospects_path, multipart: true, class: 'form-inline' do %>
-              <div class="form-group">
-                <%= submit_tag "Import CSV", class: 'btn btn-info gradient round raised btn-xs' %>
-              </div>
-              <div class="form-group">
-                <%= file_field_tag :file %>
-              </div>
+
               <div class="form-group">
                 <%= link_to "Export CSV", prospects_path(format: "csv"), class: 'btn btn-primary gradient round raised btn-xs' %>
               </div>
-            <% end %>
           </div>
         </div>
         <div class="row">

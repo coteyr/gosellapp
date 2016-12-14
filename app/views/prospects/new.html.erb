@@ -1,33 +1,47 @@
 <% provide(:title, "Making Sales a Competitive Sport") %>
 
-<%= form_for(@prospect) do |f| %>
-  <% if @prospect.errors.any? %>
-    <div id="error_explanation">
-      <p class="alert alert-danger"><%= pluralize(@prospect.errors.count, "error") %> prohibited this prospect from being saved:</p>
-        <% @prospect.errors.full_messages.each do |message| %>
-      <p class="alert alert-danger"><em>&nbsp; * <%= message %></em></p>
-      <% end %>
-    </div>
-  <% end %>
-
 <div id="agent-view">
   <div class="container-fluid">
     <div class="panel panel-default col-md-6" id="panel-container">
       <div class="panel-heading">
-        <h2 class="panel-title">Add New Prospect</h2>
+        <h2 class="panel-title">Add New Prospect(s)</h2>
       </div>
       
       <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12 right">
+            <%= form_tag import_prospects_path, multipart: true, class: 'form-inline' do %>
+              <div class="form-group">
+                <%= submit_tag "Import CSV", class: 'btn btn-info gradient round raised btn-xs' %>
+              </div>
+              <div class="form-group">
+                <%= file_field_tag :file %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+
+    <%= form_for(@prospect) do |f| %>
+      <% if @prospect.errors.any? %>
+        <div id="error_explanation">
+          <p class="alert alert-danger"><%= pluralize(@prospect.errors.count, "error") %> prohibited this prospect from being saved:</p>
+            <% @prospect.errors.full_messages.each do |message| %>
+          <p class="alert alert-danger"><em>&nbsp; * <%= message %></em></p>
+          <% end %>
+        </div>
+      <% end %>
+
         
         <div class="cant-see-me">
           <%= f.hidden_field :user_id, value: current_user.id %>
         </div>
 
-        <div class="row center" style="background: gold;">
-          <div class="form-group col-xs-12 center" style="background: gold;">
+        <div class="row" style="background: gold;">
+          <div class="col-xs-12 center">
             Use your phone's camera to Scan Business Card <i class="fa fa-camera"></i>
           </div>
-          <div class="col-xs-12" style="background: gold;">
+          <div class="col-xs-12 center">
             <input type="file" accept="image/*" capture="camera">
           </div>
         </div>

@@ -5,21 +5,26 @@ class ProspectsController < ApplicationController
 
   def index
     # Following 1 line for kalinari pagination - below lines using as a method
-    @prospects = Prospect.order("id").page(params[:page]).per(5)
+    @prospects = Prospect.order("id").page(params[:page]).per(10)
     
     # Following 3 lines for serching by street name
     if params[:loc] != nil
-      @prospects = Prospect.lookup(params[:loc]).page(params[:page]).per(5) 
+      @prospects = Prospect.lookup(params[:loc]).page(params[:page]).per(10) 
     end 
 
     # Following 3 lines for serching by company name
     if params[:co] != nil
-      @prospects = Prospect.search(params[:co]).page(params[:page]).per(5)
+      @prospects = Prospect.search(params[:co]).page(params[:page]).per(10)
+    end
+ 
+     # Following 3 lines for serching by company_phone
+    if params[:phon] != nil
+      @prospects = Prospect.search(params[:phon]).page(params[:page]).per(10)
     end
  
     # Following 4 lines selecting by list number
     if params[:list_number] != nil
-      @prospects = Prospect.where(list_number: params[:list_number]).page(params[:page]).per(5)
+      @prospects = Prospect.where(list_number: params[:list_number]).page(params[:page]).per(10)
       @goList = Prospect.select(:list_number).order(:list_number).distinct
     end
 

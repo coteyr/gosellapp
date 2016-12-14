@@ -3,218 +3,227 @@
 <div id="agent-view">
   <div class="container-fluid">
     <div class="panel panel-default col-md-6" id="panel-container">
-      <div class="panel-heading">
-        <h2 class="panel-title center">Menu</h2>
-      </div>
-      <div class="container-fluid">
-        <div class="row">&nbsp;</div>
+
+
+        <!--<div class="row">&nbsp;</div>-->
         
-        <div class="row">
-          <div class="col-xs-12 center">
-            <div class="btn-group">
-              <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fa fa-list"></span> Select Action<span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu dropdown-menu-right">
-                  <li><a data-target="#smileDial" data-toggle="collapse" data-parent="#menuGroup">Smile & Dial</a></li>
-                  <li><a data-target="#walkTalk" data-toggle="collapse" data-parent="#menuGroup">Walk & Talk</a></li>
-                  <li><a data-target="#followup" data-toggle="collapse" data-parent="#menuGroup">Follow-up</a></li>
-                  <li><a data-target="#appointments" data-toggle="collapse" data-parent="#menuGroup">Appointments</a></li>
-                  <li><a data-target="#search" data-toggle="collapse" data-parent="#menuGroup">Search for Lead(s)</a></li>
-                  <li><%= link_to "List All Leads", prospects_path %></li>
-                  <li><%= link_to "Add Lead(s)", new_prospect_path %></li>
-              </ul>
+        <!--<div class="row">-->
+        <!--  <div class="col-xs-12 center">-->
+        <!--    <div class="btn-group">-->
+        <!--      <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fa fa-list"></span> Select Action<span class="caret"></span>-->
+        <!--      </button>-->
+        <!--      <ul class="dropdown-menu dropdown-menu-right">-->
+        <!--          <li><a data-target="#smileDial" data-toggle="collapse" data-parent="#menuGroup">Smile & Dial</a></li>-->
+        <!--          <li><a data-target="#walkTalk" data-toggle="collapse" data-parent="#menuGroup">Walk & Talk</a></li>-->
+        <!--          <li><a data-target="#followup" data-toggle="collapse" data-parent="#menuGroup">Follow-up</a></li>-->
+        <!--          <li><a data-target="#appointments" data-toggle="collapse" data-parent="#menuGroup">Appointments</a></li>-->
+        <!--          <li><a data-target="#search" data-toggle="collapse" data-parent="#menuGroup">Search for Lead(s)</a></li>-->
+        <!--          <li><%= link_to "List All Leads", prospects_path %></li>-->
+        <!--          <li><%= link_to "Add Lead(s)", new_prospect_path %></li>-->
+        <!--      </ul>-->
+        <!--    </div>-->
+        <!--  </div>-->
+        <!--</div>-->
+
+        
+      <div class="row">
+        <div class="col-xs-12 center">&nbsp;</div>
+      </div>
+      
+      <div class="panel-group" id="accordion">
+        
+        <div class="panel center">
+          <div class="row">
+            <div class="col-xs-3"></div>
+            <div class="col-xs-6">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" role="button" class="btn btn-default raised btn-block">Smile & Dial</a>
+            </div>
+            <div class="col-xs-3"></div>
+          </div>
+          <div id="collapse1" class="panel-collapse collapse">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-xs-12 center">&nbsp;</div>
+              </div>
+              <div class="row">
+                <div class="center">&nbsp;</div>
+              </div>
+              <div class="row center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-default btn-sm dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="fa fa-list"></span> Select List 
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-right">
+                    <% @goList.each do |p| %>
+                      <li><%= link_to "#{p.list_number}", prospects_path(list_number: p.list_number) %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12 center">&nbsp;</div>
+              </div> 
+              <div class="row">
+                <div class="col-xs-12 center">&nbsp;</div>
+              </div> 
+              <div class="row">
+                <div class="center"><%= link_to "Reset List", "#", class:"btn btn-warning gradient round raised btn-sm" %></div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12 center">&nbsp;</div>
+              </div>
             </div>
           </div>
         </div>
-      
-        <div class="accordion-group">
-          <div id="smileDial" class="collapse">
-            <div class="row">
-              <div class="col-xs-12 center">&nbsp;<br>&nbsp;</div>
+        
+        <div class="panel center">
+          <div class="row">
+            <div class="col-xs-3"></div>
+            <div class="col-xs-6">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" role="button" class="btn btn-default raised btn-block">Walk & Talk</a>
             </div>
-            <div class="col-xs-12 center">Smile & Dial:
-              <div class="btn-group">
-                <button type="button" class="btn btn-default btn-sm dropdown-toggle"
-                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="fa fa-list"></span> Select List 
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-right">
-                  <% @goList.each do |p| %>
-                    <li><%= link_to "#{p.list_number}", prospects_path(list_number: p.list_number) %></li>
+            <div class="col-xs-3"></div>
+          </div>
+          <div id="collapse2" class="panel-collapse collapse">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-xs-12 center">&nbsp;</div>
+              </div> 
+              <div class="row">
+                <div class="center">Enter street name for all leads on a street
+                <br>&nbsp;</div>
+              </div>
+              <div class="row">
+                <div class="center">
+                  <%= form_tag(prospects_path, method: :get) do %>
+                  <%= text_field_tag :loc, params[:loc], placeholder: "Search by Street" %>
+                    <%= submit_tag 'Go', class:"btn btn-info gradient round raised btn-xs", name: nil %>
                   <% end %>
-                </ul>
+                </div>
               </div>
+              <div class="row">
+                <div class="col-xs-12 center">&nbsp;</div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12 center">&nbsp;</div>
+              </div> 
+              <div class="row">
+                <div class="center"><%= link_to "Reset All Streets", "#", class:"btn btn-warning gradient round raised btn-sm" %></div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12 center">&nbsp;</div>
+              </div> 
             </div>
           </div>
-          
-  
-          <div id="walkTalk" class="collapse">
-            <div class="row">
-              <div class="col-xs-12 center">&nbsp;<br>&nbsp;</div>
-            </div>
-            <div class="row">
-              <div class="col-xs-10 right">
-                <%= form_tag(prospects_path, method: :get) do %>
-                Walk & Talk: <%= text_field_tag :loc, params[:loc], placeholder: "Search by Street" %>
-                  <%= submit_tag 'Go', class:"btn btn-info gradient round raised btn-xs", name: nil %>
-                <% end %>
-              </div>
-              <div class="col-xs-2">
-              </div>
-            </div>
-          </div>
-          
-          
-          <div id="search" class="collapse">
-            <div class="row">
-              <div class="col-xs-12 center">&nbsp;<br>&nbsp;</div>
-            </div>
-            <div class="row">
-              <div class="col-xs-10 center">
-                <%= form_tag(prospects_path, method: :get) do %>
-                  Search for a Prospect: <%= text_field_tag :co, params[:co], placeholder: "Search by Company" %>
-                  <%= submit_tag 'Go', class:"btn btn-info gradient round raised btn-xs", name: nil %>
-                <% end %>
-              </div>
-              <div class="col-xs-2">
-              </div>
-            </div>
-          </div>
-        
         </div>
       
-
-        
-        
-<div class="panel-group" id="accordion">
-  <div class="panel panel-default">
-    <div class="panel-heading center">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-        Smile & Dial</a>
-      </h4>
-    </div>
-    <div id="collapse1" class="panel-collapse collapse">
-      <div class="panel-body">
-            <div class="row">
-              <div class="center">&nbsp;</div>
+        <div class="panel center">
+          <div class="row">
+            <div class="col-xs-3"></div>
+            <div class="col-xs-6">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapse3" role="button" class="btn btn-default raised btn-block">Search</a>
             </div>
-            <div class="row center">
-              <div class="btn-group">
-                <button type="button" class="btn btn-default btn-sm dropdown-toggle"
-                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="fa fa-list"></span> Select List 
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-right">
-                  <% @goList.each do |p| %>
-                    <li><%= link_to "#{p.list_number}", prospects_path(list_number: p.list_number) %></li>
+            <div class="col-xs-3"></div>
+          </div>
+          <div id="collapse3" class="panel-collapse collapse">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-xs-12 center">&nbsp;</div>
+              </div> 
+              <div class="row">
+                <div class="center">Search for a prospect by company name
+                <br>&nbsp;</div>
+              </div>
+              <div class="row">
+                <div class="center">
+                  <%= form_tag(prospects_path, method: :get) do %>
+                    <%= text_field_tag :co, params[:co], placeholder: "Search by Company" %>
+                    <%= submit_tag 'Go', class:"btn btn-info gradient round raised btn-xs", name: nil %>
                   <% end %>
-                </ul>
+                </div>
               </div>
+              <div class="row">
+                <div class="col-xs-12 center">&nbsp;</div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12 center">&nbsp;</div>
+              </div> 
+              <div class="row">
+                <div class="center">Search for prospect by company phone #
+                <br>&nbsp;</div>
+              </div>
+              <div class="row">
+                <div class="center">
+                  <%= form_tag(prospects_path, method: :get) do %>
+                    <%= text_field_tag :phon, params[:phon], placeholder: "Search by Co Phone" %>
+                    <%= submit_tag 'Go', class:"btn btn-info gradient round raised btn-xs", name: nil %>
+                  <% end %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12 center">&nbsp;</div>
+              </div>     
+              <div class="row">
+                <div class="col-xs-12 center">&nbsp;</div>
+              </div> 
             </div>
-            <div class="row">
-              <div class="center">&nbsp;</div>
+          </div>
+        </div>
+      
+        <div class="panel center">
+          <div class="row">
+            <div class="col-xs-3"></div>
+            <div class="col-xs-6">
+              <%= link_to "List All Leads", prospects_path, class:"btn btn-default raised btn-block" %>
             </div>
-      </div>
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading center">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-        Walk & Talk</a>
-      </h4>
-    </div>
-    <div id="collapse2" class="panel-collapse collapse">
-      <div class="panel-body">
-      
-        <div class="row">
-          <div class="center">&nbsp;</div>
-        </div>
-        <div class="row">
-          <div class="center">
-            <%= form_tag(prospects_path, method: :get) do %>
-            Walk & Talk: <%= text_field_tag :loc, params[:loc], placeholder: "Search by Street" %>
-              <%= submit_tag 'Go', class:"btn btn-info gradient round raised btn-xs", name: nil %>
-            <% end %>
+            <div class="col-xs-3"></div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-xs-12 center">&nbsp;</div>
-        </div>     
       
-      </div>
-    </div>
-  </div>
-
-  <div class="panel panel-default">
-    <div class="panel-heading center">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-        Search</a>
-      </h4>
-    </div>
-    <div id="collapse3" class="panel-collapse collapse">
-      <div class="panel-body">
-      
-        <div class="row">
-          <div class="center">&nbsp;</div>
-        </div>
-        <div class="row">
-          <div class="center">
-            <%= form_tag(prospects_path, method: :get) do %>
-              Search for a Prospect: <%= text_field_tag :co, params[:co], placeholder: "Search by Company" %>
-              <%= submit_tag 'Go', class:"btn btn-info gradient round raised btn-xs", name: nil %>
-            <% end %>
+        <div class="panel center">
+          <div class="row">
+            <div class="col-xs-3"></div>
+            <div class="col-xs-6">
+              <%= link_to "Add Lead(s)", new_prospect_path, class:"btn btn-default raised btn-block" %>
+            </div>
+            <div class="col-xs-3"></div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-xs-12 center">&nbsp;</div>
-        </div>     
       
-      </div>
-    </div>
-  </div>
-
-  <div class="panel panel-default">
-    <div class="panel-heading center">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
-        Somthing Else</a>
-      </h4>
-    </div>
-    <div id="collapse4" class="panel-collapse collapse">
-      <div class="panel-body">
-      
-        <div class="row">
-          <div class="center">&nbsp;</div>
-        </div>
-        <div class="row">
-          <div class="center">
-            <%= form_tag(prospects_path, method: :get) do %>
-            Walk & Talk: <%= text_field_tag :loc, params[:loc], placeholder: "Search by Street" %>
-              <%= submit_tag 'Go', class:"btn btn-info gradient round raised btn-xs", name: nil %>
-            <% end %>
+        <div class="panel center">
+          <div class="row">
+            <div class="col-xs-3"></div>
+            <div class="col-xs-6">
+              <%= link_to "Appointments", "#", class:"btn btn-default raised btn-block" %>
+            </div>
+            <div class="col-xs-3"></div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-xs-12 center">&nbsp;</div>
-        </div>     
       
+        <div class="panel center">
+          <div class="row">
+            <div class="col-xs-3"></div>
+            <div class="col-xs-6">
+              <%= link_to "Follow-up", "#", class:"btn btn-default raised btn-block" %>
+            </div>
+            <div class="col-xs-3"></div>
+          </div>
+        </div>
+
+        <div class="panel center">
+          <div class="row">
+            <div class="col-xs-3"></div>
+            <div class="col-xs-6">
+              <%= link_to "Delete List", "#", class:"btn btn-default raised btn-block" %>
+            </div>
+            <div class="col-xs-3"></div>
+          </div>
+        </div>
+
       </div>
+
     </div>
-  </div>
-
-</div>
-      
-        
-        
-
-      </div>
-      
-    <div class="panel-footer">&nbsp;</div>
-    
   </div>
 </div>

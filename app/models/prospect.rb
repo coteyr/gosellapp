@@ -15,6 +15,15 @@ class Prospect < ApplicationRecord
     end
   end
 
+# the following 7 lines for searching by company_phone
+  def self.search(phon)
+    if phon
+      where('company_phone LIKE ?', "%#{phon}%")
+    else
+      all
+    end
+  end
+
 # the following 7 lines for searching by street name
   def self.lookup(loc)
     if loc

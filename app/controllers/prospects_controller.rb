@@ -80,7 +80,17 @@ class ProspectsController < ApplicationController
     redirect_to prospects_url, notice: 'Prospect was successfully deleted.'
   end
 
-end
+  def reset
+    for prospect in current_user.prospects
+      if prospect.results.last and !["appointment", "follow-up", "not-qualified", "bad-record"].include? prospect.results.last.disposition
+        prospect.update_column :canvassed, false if params[:go] == 'walk'
+        prospect.update_column :called, false if params[:go] == 'smile'
+      end
+    end
+    redirect_to root_url, notice: 'Prospects have been reset'
+  end
+
+
 
 
 private
@@ -106,3 +116,4 @@ private
                 results_attributes: [:id, :disposition, :event, :activity,
                 :coordinates, :latitude, :longitude,:location, :user_id])
   end
+end

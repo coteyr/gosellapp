@@ -5,33 +5,9 @@ class Prospect < ApplicationRecord
   has_many :results
   accepts_nested_attributes_for :results, allow_destroy: true
   validates :company, presence: true
-
-# the following 7 lines for searching by company name
-  def self.search_for_company(co)
-    if co
-      where('company LIKE ?', "%#{co}%")
-    else
-      all
-    end
-  end
-
-# the following 7 lines for searching by company_phone
-  def self.search_for_phone(phon)
-    if phon
-      where('company_phone LIKE ?', "%#{phon}%")
-    else
-      all
-    end
-  end
-
-# the following 7 lines for searching by street name
-  def self.search_for_street(loc)
-    if loc
-      where('address LIKE ?', "%#{loc}%")
-    else
-      all
-    end
-  end
+  scope :uncalled, -> { where.not(called: true) }
+  scope :uncanvassed, -> { where.not(canvassed: true) }
+  scope :unlocked, -> { where.not(locked_at: (DateTime.now - 30.seconds)..DateTime.now).or(where(locked_at: nil)) }
 
 # the following 8 lines for exporting to csv
   def self.to_csv(fields = column_names, options = {})

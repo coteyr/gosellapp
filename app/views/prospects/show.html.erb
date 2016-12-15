@@ -7,7 +7,7 @@
        <div class="col-xs-12"><h6 align="right">Campaign: <%= @prospect.campaign %> | List#: <%= @prospect.list_number %></h6></div>
         <h2 class="panel-title"><%= @prospect.company %></h2>
       </div>
-        
+
       <div class="container-fluid">
         <div class="row">
           <div class="col-xs-10">
@@ -31,7 +31,7 @@
                 <% end %>
               </div>
             </div>
-        
+
             <% if @prospect.company_phone.present? %>
               <div class="row">
                 <div class="col-xs-6"><span class="fa fa-phone"></span> <%= @prospect.company_phone %></div>
@@ -112,7 +112,7 @@
         </div>
 
         <% @prospect.notes.each do |n| %>
-          <% if n.detail.present? %>
+          <% if !n.new_record? %>
             <div class="row">
               <div class="col-xs-12">
                 Note: <%= n.created_at.strftime("%m/%d/%y") %> - <%= n.detail %>
@@ -124,7 +124,7 @@
         <% if @prospect.results.present? %>
           <% if @prospect.results.last.disposition == "appointment" %>
             <div class="row">
-              <div class="col-xs-12 text-center"><strong>Appointment</strong> scheduled for 
+              <div class="col-xs-12 text-center"><strong>Appointment</strong> scheduled for
                 <%# if @prospect.results.event.present? %>
                   <strong><%#= @prospect.results.last.event.strftime("%m/%d/%y at %I:%M %p") %></strong>
                 <%# end %>
@@ -133,12 +133,12 @@
           <% end %>
           <% if @prospect.results.last.disposition == "follow-up" %>
             <div class="row">
-              <div class="col-xs-12 text-center">Must <strong>Follow up </strong> on 
+              <div class="col-xs-12 text-center">Must <strong>Follow up </strong> on
                 <%# if @prospect.results.event.present? %>
                   <strong><%#= @prospect.results.last.event.strftime("%m/%d/%y at %I:%M %p") %></strong>
                 <%# else %>
                   <em>Date not entered!</em>
-                <%# end %>    
+                <%# end %>
               </div>
             </div>
           <% end %>
@@ -147,14 +147,14 @@
         <%= render 'prospects/show_contacts' %>
 
         <%= render 'prospects/show_more' %>
-      
+
         <%= render "results_form" %>
 
         <div id="default-toolbar" class="collapse in">
           <div class="row">
             <div class="col-xs-12">
               <a href="#more" class="btn btn-info btn-sm gradient raised round" role="button" data-toggle="collapse">More</a>
-              <%= link_to "Edit", edit_prospect_path(@prospect), class: "btn btn-warning btn-sm gradient raised round" %>   
+              <%= link_to "Edit", edit_prospect_path(@prospect), class: "btn btn-warning btn-sm gradient raised round" %>
               <%= link_to "Delete", @prospect, method: :delete, data: { confirm: 'Are you sure you want to delete Prospect?'}, class: "btn btn-danger btn-sm gradient raised round" %>
               <a data-target="#result-form,#result-toolbar,#default-toolbar" class="btn btn-primary gradient raised round pull-right" role="button" data-toggle="collapse"><span class="fa fa-legal" aria-hidden="true"> Result</a>
             </div>
@@ -164,6 +164,6 @@
     </div>
 
     <%= render 'shared/leaderboard' %>
-      
+
   </div>
 </div>

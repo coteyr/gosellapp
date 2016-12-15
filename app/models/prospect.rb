@@ -5,6 +5,8 @@ class Prospect < ApplicationRecord
   has_many :results
   accepts_nested_attributes_for :results, allow_destroy: true
   validates :company, presence: true
+  scope :uncalled, -> { where.not(called: true) }
+  scope :uncanvassed, -> { where.not(canvassed: true) }
 
 # the following 8 lines for exporting to csv
   def self.to_csv(fields = column_names, options = {})

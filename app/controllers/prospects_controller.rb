@@ -18,9 +18,14 @@ class ProspectsController < ApplicationController
       @goList = Prospect.select(:list_number).order(:list_number).distinct
     end
     if params[:go] == 'walk' or params[:go] == 'smile'
-      @prospect = current_user.prospects.where(terms).where(primary_terms).first
-      render action: 'call' if params[:go] == 'smile'
-      render action: 'canvass' if params[:go] == 'walk'
+      @prospect = current_user.prospects.uncalled.where(terms).where(primary_terms).first if params[:go] == 'smile'
+      @prospect = current_user.prospects.uncanvassed.where(terms).where(primary_terms).first if params[:go] == 'walk'
+      if @prospect
+        render action: (params[:go] == 'walk' ? 'canvass' : 'call') # when I know more about these different views I suspect that they will different partials on show and we can loose this smell.
+      else
+        @prospects = []
+        redirect_to root_url, notice: 'All Prospects Viewed'
+      end
     else
       @prospects = current_user.prospects.where(terms).where(primary_terms).page(params[:page]).per(10)
       respond_to do |format|
@@ -60,20 +65,19 @@ class ProspectsController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @prospect.update(prospect_params)
-        format.html { redirect_to @prospect, notice: 'Prospect was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
+    @prospect = Prospect.find params[:id]
+    if @prospect.update_attributes(prospect_params)
+      @prospect.update_column :canvassed, true if params[:go] == 'walk'
+      @prospect.update_column :called, true if params[:go] == 'smile'
+      redirect_to prospects_path(go: params[:go])
+    else
+      render :show
     end
   end
 
   def destroy
     @prospect.destroy
-    respond_to do |format|
-      format.html { redirect_to prospects_url, notice: 'Prospect was successfully deleted.' }
-    end
+    redirect_to prospects_url, notice: 'Prospect was successfully deleted.'
   end
 
 end

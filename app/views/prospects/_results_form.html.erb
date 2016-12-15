@@ -29,24 +29,11 @@
       <div class="col-xs-2">Note:</div>
         <%= f.fields_for :notes, @prospect.notes.build do |builder| %>
           <% if builder.object.new_record? %>
-            <div class="col-xs-10"><%= builder.text_field :detail, class: "form-control" %></div>
+            <div class="col-xs-10"><%= builder.text_field :detail, class: "form-control", value: builder.object.detail %></div>
           <% end %>
       <% end %>
     </div>
 
-<!--The following 5 lines should only be present in canvass.html.erb-->
-    <div class="row cant-see-me">
-      <%= fields_for(@prospect) do |f| %>
-        <%= f.hidden_field :canvassed, value: "true" %>
-      <% end %>
-    </div>
-
-<!--The following 5 lines should only be present in call.html.erb-->
-    <div class="row cant-see-me">
-      <%= fields_for(@prospect) do |f| %>
-        <%= f.hidden_field :called, value: "true" %>
-      <% end %>
-    </div>
 
 
 
@@ -85,14 +72,14 @@
 
             <!--The following data will be passed but the row should not be visable-->
             <div class="row cant-see-me">
-              Next line will identify wether the dispositioned event was 
+              Next line will identify wether the dispositioned event was
               <%= builder_2.hidden_field :activity, value: "activity-test" %>
               <%= builder_2.hidden_field :location, value: "location-test" %>
               <%= builder_2.hidden_field :time_on_contact, value: "toc-test" %>
               <%= builder_2.hidden_field :user_id, value: current_user.id %>
             </div>
-            
-              
+
+
           <!--(The following row should not be visable)-->
             <div class="row">
               Coordinates <%= builder_2.text_field :coordinates, id: "Position1" %>
@@ -103,9 +90,9 @@
             <div class="row">
               <div "col-xs-12">&nbsp;</div>
             </div>
- 
+
           <div id="event" class="collapse">
-            
+
             <div class="row">
               <div class="form-group col-xs-12">
                 <%= builder_2.label :event, 'Date & Time' %><br>
@@ -121,12 +108,14 @@
 
   </div>
 
+    <%= hidden_field_tag :go, params[:go] if params[:go] %>
     <div class="panel-footer">
       <div id="result-toolbar" class="collapse">
         <div class="row">
           <div class="col-xs-6">
             <a data-target="#result-form,#result-toolbar,#default-toolbar" class="btn btn-default round raised btn-sm" role="button" data-toggle="collapse">Back</a>
           </div>
+
           <div class="col-xs-6">
             <%= f.submit 'Disposition', class: "btn btn-primary gradient round raised pull-right" %>
           </div>

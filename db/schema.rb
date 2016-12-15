@@ -88,13 +88,13 @@ ActiveRecord::Schema.define(version: 20161213013715) do
 
   create_table "results", force: :cascade do |t|
     t.string   "disposition"
+    t.datetime "event"
     t.integer  "prospect_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "user_id"
     t.string   "location"
     t.string   "activity"
-    t.datetime "event"
     t.float    "coordinates"
     t.float    "latitude"
     t.float    "longitude"

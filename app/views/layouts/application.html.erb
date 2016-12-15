@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
-    <%= render 'shared/head' %>
+    <%= render 'layouts/head' %>
 
   <body>
-    <%= render 'shared/navbar' %>
+    <%= render 'layouts/navbar' %>
     <% if notice %>
       <p class="alert alert-success"><%= notice %></p>
     <% end %>
@@ -11,6 +11,6 @@
       <p class="alert alert-danger"><%= alert %></p>
     <% end %>
     <%= yield %>
-    <%= render "shared/footer" %>
+    <%= render "layouts/footer" %>
   </body>
 </html>

@@ -90,6 +90,15 @@ class ProspectsController < ApplicationController
     redirect_to root_url, notice: 'Prospects have been reset'
   end
 
+  def delete_list
+  end
+  def list_delete
+    # this is the actual delete method on post
+    for prospect in current_user.prospects.where(list_number: params[:list])
+      prospect.destroy
+    end
+    redirect_to root_url, notice: 'List deleted'
+  end
 
 
 

@@ -18,9 +18,10 @@ class ProspectsController < ApplicationController
       @goList = Prospect.select(:list_number).order(:list_number).distinct
     end
     if params[:go] == 'walk' or params[:go] == 'smile'
-      @prospect = current_user.prospects.uncalled.where(terms).where(primary_terms).first if params[:go] == 'smile'
-      @prospect = current_user.prospects.uncanvassed.where(terms).where(primary_terms).first if params[:go] == 'walk'
+      @prospect = current_user.prospects.unlocked.uncalled.where(terms).where(primary_terms).first if params[:go] == 'smile'
+      @prospect = current_user.prospects.unlocked.uncanvassed.where(terms).where(primary_terms).first if params[:go] == 'walk'
       if @prospect
+        @prospect.update_column :locked_at, DateTime.now
         render action: (params[:go] == 'walk' ? 'canvass' : 'call') # when I know more about these different views I suspect that they will different partials on show and we can loose this smell.
       else
         @prospects = []

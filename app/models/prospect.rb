@@ -7,6 +7,7 @@ class Prospect < ApplicationRecord
   validates :company, presence: true
   scope :uncalled, -> { where.not(called: true) }
   scope :uncanvassed, -> { where.not(canvassed: true) }
+  scope :unlocked, -> { where.not(locked_at: (DateTime.now - 30.seconds)..DateTime.now).or(where(locked_at: nil)) }
 
 # the following 8 lines for exporting to csv
   def self.to_csv(fields = column_names, options = {})

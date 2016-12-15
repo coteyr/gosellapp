@@ -19,7 +19,8 @@ class ProspectsController < ApplicationController
     end
     if params[:go] == 'walk' or params[:go] == 'smile'
       @prospect = current_user.prospects.where(terms).where(primary_terms).first
-      render action: 'show'
+      render action: 'call' if params[:go] == 'smile'
+      render action: 'canvass' if params[:go] == 'walk'
     else
       @prospects = current_user.prospects.where(terms).where(primary_terms).page(params[:page]).per(10)
       respond_to do |format|

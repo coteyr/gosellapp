@@ -17,10 +17,15 @@ class ProspectsController < ApplicationController
       primary_terms.merge!(list_number: params[:list_number])
       @goList = Prospect.select(:list_number).order(:list_number).distinct
     end
-    @prospects = current_user.prospects.where(terms).where(primary_terms).page(params[:page]).per(10)
-    respond_to do |format|
-      format.html
-      format.csv { send_data @prospects.to_csv(['user_id', 'campaign', 'list_number', 'source', 'company_phone', 'company', 'first_name', 'last_name', 'title', 'address', 'address2', 'city', 'state', 'zip', 'county', 'fax', 'numberofemployees', 'website', 'sic']) }
+    if params[:go] == 'walk' or params[:go] == 'smile'
+      @prospect = current_user.prospects.where(terms).where(primary_terms).first
+      render action: 'show'
+    else
+      @prospects = current_user.prospects.where(terms).where(primary_terms).page(params[:page]).per(10)
+      respond_to do |format|
+        format.html
+        format.csv { send_data @prospects.to_csv(['user_id', 'campaign', 'list_number', 'source', 'company_phone', 'company', 'first_name', 'last_name', 'title', 'address', 'address2', 'city', 'state', 'zip', 'county', 'fax', 'numberofemployees', 'website', 'sic']) }
+      end
     end
   end
   # Following 4 lines for importing from csv

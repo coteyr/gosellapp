@@ -3,29 +3,6 @@
 <div id="agent-view">
   <div class="container-fluid">
     <div class="panel panel-default col-md-6" id="panel-container">
-
-
-        <!--<div class="row">&nbsp;</div>-->
-
-        <!--<div class="row">-->
-        <!--  <div class="col-xs-12 center">-->
-        <!--    <div class="btn-group">-->
-        <!--      <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fa fa-list"></span> Select Action<span class="caret"></span>-->
-        <!--      </button>-->
-        <!--      <ul class="dropdown-menu dropdown-menu-right">-->
-        <!--          <li><a data-target="#smileDial" data-toggle="collapse" data-parent="#menuGroup">Smile & Dial</a></li>-->
-        <!--          <li><a data-target="#walkTalk" data-toggle="collapse" data-parent="#menuGroup">Walk & Talk</a></li>-->
-        <!--          <li><a data-target="#followup" data-toggle="collapse" data-parent="#menuGroup">Follow-up</a></li>-->
-        <!--          <li><a data-target="#appointments" data-toggle="collapse" data-parent="#menuGroup">Appointments</a></li>-->
-        <!--          <li><a data-target="#search" data-toggle="collapse" data-parent="#menuGroup">Search for Lead(s)</a></li>-->
-        <!--          <li><%= link_to "List All Leads", prospects_path %></li>-->
-        <!--          <li><%= link_to "Add Lead(s)", new_prospect_path %></li>-->
-        <!--      </ul>-->
-        <!--    </div>-->
-        <!--  </div>-->
-        <!--</div>-->
-
-
       <div class="row">
         <div class="col-xs-12 center">&nbsp;</div>
       </div>
@@ -50,14 +27,14 @@
               </div>
               <div class="row center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-default btn-sm dropdown-toggle"
+                  <button type="button" class="btn btn-success gradient round btn-sm dropdown-toggle"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="fa fa-list"></span> Select List
                     <span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu dropdown-menu-right">
                     <% @goList.each do |p| %>
-                      <li><%= link_to "#{p.list_number}", prospects_path(list_number: p.list_number, go: 'smile') %></li>
+                      <li><%= link_to "#{p.list_number}", prospects_path(list_number: p.list_number, go: 'smile'), data: {confirm: "Warning... keep this up and you're going to start making more money."} %></li>
                     <% end %>
                   </ul>
                 </div>
@@ -68,9 +45,26 @@
               <div class="row">
                 <div class="col-xs-12 center">&nbsp;</div>
               </div>
+              
               <div class="row">
                 <div class="center"><%= link_to "Reset Lists", reset_prospects_path(go: 'smile'), class:"btn btn-warning gradient round raised btn-sm" %></div>
               </div>
+
+              <div class="row center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-warning gradient round btn-sm dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="fa fa-list"></span>Reset a List
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-right">
+                    <% @goList.each do |r| %>
+                      <li><%= link_to "#{r.list_number}", reset_prospects_path(go: 'smile'), data: {confirm: "Hit the end of the Line?  Let's do it again!"} %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
+            
               <div class="row">
                 <div class="col-xs-12 center">&nbsp;</div>
               </div>
@@ -217,9 +211,43 @@
           <div class="row">
             <div class="col-xs-3"></div>
             <div class="col-xs-6">
-              <%= link_to "Delete List", delete_list_prospects_path, class:"btn btn-default raised btn-block" %>
+              <%= link_to "Delete List", list_delete_prospects_path, class:"btn btn-default raised btn-block" %>
             </div>
             <div class="col-xs-3"></div>
+          </div>
+        </div>
+
+        <div class="panel center">
+          <div class="row">
+            <div class="col-xs-3"></div>
+            <div class="col-xs-6">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapse4" role="button" class="btn btn-default raised btn-block">Delete a List</a>
+            </div>
+            <div class="col-xs-3"></div>
+          </div>
+          <div id="collapse4" class="panel-collapse collapse">
+            <div class="panel-body">
+              <div class="row">
+                <div class="center">&nbsp;</div>
+              </div>
+              <div class="row center">
+                <div class="btn-group dropup">
+                  <button type="button" class="btn btn-danger btn-sm dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="fa fa-list"></span> Delete List
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-up">
+                    <% @goList.each do |p| %>
+                      <li><%= link_to "#{p.list_number}", list_delete_prospects_path(list_number: p.list_number), data: {confirm: "You are about to delete a list, please confirm your intent."} %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12 center">&nbsp;</div>
+              </div>
+            </div>
           </div>
         </div>
 

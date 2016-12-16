@@ -35,18 +35,15 @@
     </div>
 
 
-
-
-
       <%= f.fields_for :results, @prospect.results.build do |builder_2| %>
           <% if builder_2.object.new_record? %>
               <div class="row">
-                <div class="col-xs-4" data-toggle="collapse" data-target="#event">
-                  <%= builder_2.radio_button :disposition, 'appointment' %>
+                <div class="col-xs-4">
+                  <%= builder_2.radio_button :disposition, 'appointment', data: { toggle:"collapse", target:"#event"} %>
                   <%= builder_2.label :disposition, 'Appt Set' %>
                 </div>
-                <div class="col-xs-4" data-toggle="collapse" data-target="#event">
-                  <%= builder_2.radio_button :disposition, 'follow-up' %>
+                <div class="col-xs-4">
+                  <%= builder_2.radio_button :disposition, 'follow-up', data: { toggle:"collapse", target:"#event"} %>
                   <%= builder_2.label :disposition, 'Follow-up'%>
                 </div>
                 <div class="col-xs-4">
@@ -127,4 +124,3 @@
 <script type="text/javascript">
   window.onload = function() { document.myform.action = getLocationConstant(); }
 </script>
-

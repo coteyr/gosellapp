@@ -1,0 +1,25 @@
+<% # @Author: Robert D. Cotey II <coteyr@coteyr.net> %>
+<% # @Date:   2016-12-22 06:09:10 %>
+<% # @Last Modified by:   Robert D. Cotey II <coteyr@coteyr.net> %>
+<% # @Last Modified time: 2016-12-22 06:09:10 %>
+
+%= row do %>
+  %= well 'Imports' do %>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Status</th>
+          <th>Imported At</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render partial: 'import', collection: @imports %>
+      </tbody>
+    </table>
+    <p class="center">
+      <%= button 'Import CSV', new_import_path, type: 'success' %>
+    </p>
+  % end %>
+% end %>

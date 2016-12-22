@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :imports
+  resources :jobs
   resources :prospects do
     post "disposition"
     collection do

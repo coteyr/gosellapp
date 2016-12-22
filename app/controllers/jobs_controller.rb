@@ -1,8 +1,8 @@
 class JobsController < ApplicationController
   def index
-    @jobs = DelayedJob.all
+    @jobs = Delayed::Job.all
   end
   def show
-    @job = DelayedJob.find params[:id]
+    @job = Delayed::Job.find params[:id]
   end
 end

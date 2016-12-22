@@ -1,0 +1,12 @@
+<% # @Author: Robert D. Cotey II <coteyr@coteyr.net> %>
+<% # @Date:   2016-12-22 12:29:36 %>
+<% # @Last Modified by:   Robert D. Cotey II <coteyr@coteyr.net> %>
+<% # @Last Modified time: 2016-12-22 12:29:36 %>
+
+<%= form_for @import, multipart: true, class: 'form-inline' do |f| %>
+  <%= field_set_tag 'Upload CSV' do %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.file_field :data %>
+    <%= f.submit 'Submit' %>
+  <% end %>
+<% end %>

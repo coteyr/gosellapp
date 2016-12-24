@@ -1,0 +1,24 @@
+<% provide(:title, "Making Sales a Competitive Sport") %>
+
+<%= row do %>
+  <%= panel size: 6, offset: 3 do %>
+    <div id="accordion">
+      <%= menu_toggle 'Smile & Dial', 'collapse1' do %>
+        <%= render partial: 'smile' %>
+      <% end %>
+      <%= menu_toggle 'Walk & Talk', 'collapse2' do %>
+        <%= render partial: 'walk' %>
+      <% end %>
+      <%= menu_toggle 'Search', 'collapse3' do %>
+        <%= render partial: 'search' %>
+      <% end %>
+      <%= menu_button 'List all Leads', prospects_path %>
+      <%= menu_button 'Add Lead(s)', new_prospect_path %>
+      <%= menu_button 'Appointments', '#' %>
+      <%= menu_button 'Follow-up', '#' %>
+      <%= menu_button 'Delete List', delete_list_prospects_path %>
+      <%= menu_button 'Background Tasks', jobs_path %>
+      <%= menu_button 'Imports', imports_path %>
+    </div>
+  <% end %>
+<% end %>

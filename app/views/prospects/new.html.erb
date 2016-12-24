@@ -6,11 +6,11 @@
       <div class="panel-heading">
         <h2 class="panel-title">Add New Prospect(s)</h2>
       </div>
-      
+
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-12 right">
-            <%= form_tag import_prospects_path, multipart: true, class: 'form-inline' do %>
+            <%= form_tag imports_path, multipart: true, class: 'form-inline' do %>
               <div class="form-group">
                 <%= submit_tag "Import CSV", class: 'btn btn-info gradient round raised btn-xs' %>
               </div>
@@ -32,7 +32,7 @@
         </div>
       <% end %>
 
-        
+
         <div class="cant-see-me">
           <%= f.hidden_field :user_id, value: current_user.id %>
         </div>
@@ -45,7 +45,7 @@
             <input type="file" accept="image/*" capture="camera">
           </div>
         </div>
-        
+
         <div class="row">
           <div class="form-group col-xs-6">
             <%= f.label :campaign %>
@@ -56,7 +56,7 @@
             <%= f.text_field :list_number, class: "form-control" %>
           </div>
         </div>
-        
+
         <div class="row">
           <div class="form-group col-xs-6">
             <%= f.label :company %>

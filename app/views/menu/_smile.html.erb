@@ -1,0 +1,22 @@
+<% # @Author: Robert D. Cotey II <coteyr@coteyr.net> %>
+<% # @Date:   2016-12-22 14:03:11 %>
+<% # @Last Modified by:   Robert D. Cotey II <coteyr@coteyr.net> %>
+<% # @Last Modified time: 2016-12-22 14:03:11 %>
+
+<div class="btn-group">
+  <button type="button" class="btn btn-default btn-sm dropdown-toggle"
+    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="fa fa-list"></span> Select List
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-right">
+    <% @goList.each do |p| %>
+      <li><%= link_to "#{p.list_number}", prospects_path(list_number: p.list_number, go: 'smile') %></li>
+    <% end %>
+  </ul>
+</div>
+<div class="row">
+  <div class="center">
+    <%= link_to "Reset Lists", reset_prospects_path(go: 'smile'), class:"btn btn-warning gradient round raised btn-sm" %>
+  </div>
+</div>

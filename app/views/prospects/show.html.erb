@@ -1,125 +1,74 @@
 <% provide(:title, "Making Sales a Competitive Sport") %>
-
-<div id="agent-view">
-  <div class="container-fluid">
-    <div class="panel panel-default col-md-6" id="panel-container">
-      <div class="panel-heading">
-       <div class="col-xs-12"><h6 align="right">Campaign: <%= @prospect.campaign %> | List#: <%= @prospect.list_number %></h6></div>
-        <h2 class="panel-title"><%= @prospect.company %></h2>
-      </div>
-
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-xs-10">
-            <div class="row">
-              <div class="col-xs-7">
-                <% if @prospect.primary_contact == 3 %>
-                    <%= @prospect.first_name_3 %> <%= @prospect.last_name_3 %>
-                  <% elsif @prospect.primary_contact == 2 %>
-                    <%= @prospect.first_name_2 %> <%= @prospect.last_name_2 %>
-                  <% else %>
-                    <%= @prospect.first_name %> <%= @prospect.last_name %>
-                <% end %>
-              </div>
-              <div class="col-xs-4">
-                <% if @prospect.primary_contact == 3 %>
-                    <%= @prospect.title_3 %>
-                  <% elsif @prospect.primary_contact == 2 %>
-                    <%= @prospect.title_2 %>
-                  <% else %>
-                    <%= @prospect.title %>
-                <% end %>
-              </div>
-            </div>
-
-            <% if @prospect.company_phone.present? %>
-              <div class="row">
-                <div class="col-xs-6"><span class="fa fa-phone"></span> <%= @prospect.company_phone %></div>
-                <div class="col-xs-6"></div>
-              </div>
-            <% end %>
-          </div>
-
-          <div class="col-xs-2">
-            <div class="btn-group">
-              <button type="button" class="btn btn-info gradient round raised btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span><span class="caret"></span>
+<%= row do %>
+  <div class="col-md-6">
+    <%= well @prospect.company, subheading: "<strong>Campaign:</strong> #{@prospect.campaign } | <strong> List#:</strong> #{@prospect.list_number}" do %>
+      <%= row do %>
+        <div class="col-xs-7">
+          <%= primary_contact(@prospect, :first_name) %>
+          <%= primary_contact(@prospect, :last_name) %>
+        </div>
+        <div class="col-xs-4">
+          <%= primary_contact(@prospect, :title) %>
+        </div>
+        <div class="col-xs-1">
+          <button type="button" class="btn btn-info gradient round raised btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span><span class="caret"></span>
               </button>
-              <ul class="dropdown-menu dropdown-menu-right">
-                <% if @prospect.first_name.present? || @prospect.last_name.present? %>
-                  <li><a data-target="#contact1" data-toggle="collapse">
-                  <%= @prospect.title %> - <%= @prospect.first_name %> <%= @prospect.last_name %></a></li>
-                  <% else %>
-                    <li><%= link_to "Add Contact (1)", edit_contacts_path(@prospect.id) %></li>
-                <% end %>
-                <% if @prospect.first_name_2.present? || @prospect.last_name_2.present? %>
-                  <li><a data-target="#contact2" data-toggle="collapse">
-                  <%= @prospect.title_2 %> - <%= @prospect.first_name_2 %> <%= @prospect.last_name_2 %></a></li>
-                  <% else %>
-                    <li><%= link_to "Add Contact (2)", edit_contacts_path(@prospect.id) %></li>
-                <% end %>
-                <% if @prospect.first_name_3.present? || @prospect.last_name_3.present? %>
-                  <li><a data-target="#contact3" data-toggle="collapse">
-                  <%= @prospect.title_3 %> - <%= @prospect.first_name_3 %> <%= @prospect.last_name_3 %></a></li>
-                  <% else %>
-                    <li><%= link_to "Add Contact (3)", edit_contacts_path(@prospect.id) %></li>
-                <% end %>
-                <% if @prospect.first_name.present? || @prospect.last_name.present? ||
-                    @prospect.first_name_2.present? || @prospect.last_name_2.present? ||
-                    @prospect.first_name_3.present? || @prospect.last_name_3.present? %>
-                <li><a data-target="#contact1,#contact2,#contact3" data-toggle="collapse">All Contacts</a></li>
-                <% end %>
-              </ul>
-            </div>
-          </div>
         </div>
-
-        <% if @prospect.address.present? %>
-        <div class="row">
-          <div class="col-xs-12"><%= @prospect.address %>
-            <% if @prospect.address2.present? %>
-              &nbsp; &nbsp; - &nbsp; &nbsp; <%= @prospect.address2 %>
-            <% end %>
-          </div>
-        </div>
+      <% end %>
+      <% unless @prospect.company_phone.blank? %>
+        <%= row do %>
+          <div class="col-xs-6"><span class="fa fa-phone"></span> <%= @prospect.company_phone %></div>
         <% end %>
-        <% if @prospect.city.present? || @prospect.state.present? %>
-        <div class="row">
-          <div class="col-xs-12"><%= @prospect.city %>
+      <% end %>
+      <% unless @prospect.address.blank? %>
+        <%= row do %>
+          <div class="col-xs-12">
+            <%= @prospect.address %>
+            <% if @prospect.address2.present? %>&nbsp; &nbsp; - &nbsp; &nbsp; <%= @prospect.address2 %><% end %>
+          </div>
+        <% end %>
+      <% end %>
+      <% if @prospect.city.present? || @prospect.state.present? %>
+        <%= row do %>
+          <div class="col-xs-12">
+            <%= @prospect.city %>
             <% if @prospect.state.present? %>, <%= @prospect.state %> &nbsp;<% end %>
-              <%= @prospect.zip %>
           </div>
-        </div>
         <% end %>
-        <div class="row">
-          <div class="col-xs-6">
-            <% if @prospect.primary_contact == 3 && @prospect.email_3.present? %>
-                <a href="mailto:<%= @prospect.email_3 %>">
-                <span class="glyphicon glyphicon-envelope"></span> <%= @prospect.email_3 %></a>
-              <% elsif @prospect.primary_contact == 2 && @prospect.email_2.present? %>
-                <a href="mailto:<%= @prospect.email_2 %>">
-                <span class="glyphicon glyphicon-envelope"></span> <%= @prospect.email_2 %></a>
-              <% elsif @prospect.email.present? %>
-                <a href="mailto:<%= @prospect.email %>">
-                <span class="glyphicon glyphicon-envelope"></span> <%= @prospect.email %></a>
-            <% end %>
-          </div>
-          <div class="col-xs-6">
-            <% if @prospect.website.present? %>
-              <a href="http://<%= @prospect.website %>" target="New">
-              <span class="glyphicon glyphicon-globe"></span> <%= @prospect.website %></a>
-            <% end %>
-          </div>
-        </div>
-
-        <% @prospect.notes.each do |n| %>
-          <% if !n.new_record? %>
-            <div class="row">
-              <div class="col-xs-12">
-                Note: <%= n.created_at.strftime("%m/%d/%y") %> - <%= n.detail %>
-              </div>
-            </div>
+        <%= row do %>
+          <div class="col-xs-12"><%= @prospect.zip %></div>
+        <% end %>
+      <% end %>
+      <%= row do %>
+        <div class="col-xs-6">
+          <% unless primary_contact(@prospect, :email).blank? %>
+            <span class="glyphicon glyphicon-envelope"></span><%= mail_to primary_contact(@prospect, :email) %>
           <% end %>
-        <% end %>
+        </div>
+        <div class="col-xs-6">
+          <% unless @prospect.website.blank? %>
+            <span class="glyphicon glyphicon-globe"></span> <%= link_to @prospect.website, @prospect.website, target: '_blank' %>
+          <% end %>
+        </div>
+      <% end %>
+      <%= render partial: 'note', collection: @prospect.notes %>
+    <% end %>
+
+
+
+  </div>
+
+
+  <%= panel size: 6, offset: 0 do %>
+    b
+  <% end %>
+<% end %>
+
+
+
+
+
+
 
         <% if @prospect.results.present? %>
           <% if @prospect.results.last.disposition == "appointment" %>

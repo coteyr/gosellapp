@@ -9,8 +9,8 @@ module ApplicationHelper
       "http://gravatar.com/avatar/#{gravatar_id}.png?s=48&d=#{CGI.escape(default_url)}"
     end
   end
-  
-  
+
+
   # Returns the full title on a per-page basis.
   def full_title(page_title = "")
     base_title = "GoSell"
@@ -21,5 +21,12 @@ module ApplicationHelper
     end
   end
 
-  
+  def button(title, link, options)
+    css = "btn gradient round raised btn-xs"
+    css += " btn-#{options[:type]}" if !options[:type].blank?
+    klass = options.merge!(class: css)
+    return link_to(title, link, klass)
+  end
+
+
 end

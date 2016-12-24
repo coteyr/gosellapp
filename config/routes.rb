@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :imports
+  resources :jobs
   resources :prospects do
     post "disposition"
     collection do
@@ -11,7 +13,7 @@ Rails.application.routes.draw do
   end
 
   devise_for :users
-  root 'prospects#menu'
+  root 'menu#index'
   get "menu" => "prospects#menu"
   get "update_accessible" => "results#update_accessible"
   get 'edit_contacts/:id' => 'prospects#edit_contacts', as: :edit_contacts

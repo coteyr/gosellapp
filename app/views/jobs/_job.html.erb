@@ -1,0 +1,15 @@
+<% # @Author: Robert D. Cotey II <coteyr@coteyr.net> %>
+<% # @Date:   2016-12-22 05:51:19 %>
+<% # @Last Modified by:   Robert D. Cotey II <coteyr@coteyr.net> %>
+<% # @Last Modified time: 2016-12-22 05:51:19 %>
+
+<tr>
+  <td><%= job.id %></td>
+  <td><%= job.priority %></td>
+  <td><%= job.attempts %></td>
+  <td><%= job.attempts.to_i > 0 ? l(job.run_at) : 'Pending' %></td>
+  <td><%= job_status(job) %></td>
+  <td>
+    <%= button 'View', job_path(job), type: 'success' %>
+  </td>
+</tr>

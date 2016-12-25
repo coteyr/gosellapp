@@ -6,4 +6,7 @@ class User < ApplicationRecord
     has_many :prospects
     has_many :results, through: :prospects
   validates :username, presence: true, uniqueness: true
+  def name
+    "#{first_name} #{last_name}"
+  end
 end

@@ -21,12 +21,23 @@ module ApplicationHelper
     end
   end
 
-  def button(title, link, options)
-    css = "btn gradient round raised btn-xs"
+  def button(title, link, options={})
+    size = 'xs'
+    size = options.delete :size if options[:size]
+    css = "btn gradient round raised btn-#{size}"
     css += " btn-#{options[:type]}" if !options[:type].blank?
+    css += " #{options[:class]}" if options[:class]
     klass = options.merge!(class: css)
     return link_to(title, link, klass)
   end
-
-
+  def data_pair(title, objekt, method)
+    to_return = '<div class="row" style="margin-top: 0px">'
+    unless objekt.send(method).blank?
+      to_return += title
+      to_return += '&nbsp;'
+      to_return += objekt.send(method)
+    end
+    to_return += '</div>'
+    to_return.html_safe
+  end
 end

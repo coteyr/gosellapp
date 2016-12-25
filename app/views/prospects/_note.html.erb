@@ -3,10 +3,10 @@
 <% # @Last Modified by:   Robert D. Cotey II <coteyr@coteyr.net> %>
 <% # @Last Modified time: 2016-12-22 15:39:31 %>
 
-<% if !n.new_record? %>
+<% if !note.new_record? %>
   <%= row do %>
     <div class="col-xs-12">
-       Note: <%= n.created_at.strftime("%m/%d/%y") %> - <%= n.detail %>
+       Note: <%= note.created_at.strftime("%m/%d/%y") %> - <%= note.detail %>
      </div>
    <% end %>
  <% end %>

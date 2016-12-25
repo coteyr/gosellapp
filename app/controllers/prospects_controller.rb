@@ -6,12 +6,15 @@ class ProspectsController < ApplicationController
   def index
     terms = {}
     primary_terms = {}
-    if params[:loc]
-      terms = ['address like ?', "%#{params[:loc]}%"]
-    elsif params[:co]
-      terms = ['company like ?', "%#{params[:co]}%"]
-    elsif params[:phon]
-      terms = ['company_phone like ?', "#{params{:phon}}"]
+    if value = params[:loc] || session[:loc]
+      session[:loc] = params[:loc] if params[:loc]
+      terms = ['address like ?', "%#{value}%"]
+    elsif value = params[:co] || session[:co]
+      session[:co] = params[:co] if params[:co]
+      terms = ['company like ?', "%#{value}%"]
+    elsif value =  params[:phon] || session[:phon]
+      session[:phon] = params[:phon] if params[:phon]
+      terms = ['company_phone like ?', "%#{value}%"]
     end
     if params[:list_number]
       primary_terms.merge!(list_number: params[:list_number])
@@ -78,7 +81,7 @@ class ProspectsController < ApplicationController
 
   def destroy
     @prospect.destroy
-    redirect_to prospects_url, notice: 'Prospect was successfully deleted.'
+    redirect_to prospects_url(go: params[:go]), notice: 'Prospect was successfully deleted.'
   end
 
   def reset

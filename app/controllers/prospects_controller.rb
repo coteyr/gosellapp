@@ -16,8 +16,9 @@ class ProspectsController < ApplicationController
       session[:phon] = params[:phon] if params[:phon]
       terms = ['company_phone like ?', "%#{value}%"]
     end
-    if params[:list_number]
-      primary_terms.merge!(list_number: params[:list_number])
+    if value = params[:list_number]  || session[:list_number]
+      session[:list_number] = params[:list_number] if params[:list_number]
+      primary_terms.merge!(list_number: value)
       @goList = Prospect.select(:list_number).order(:list_number).distinct
     end
     if params[:go] == 'walk' or params[:go] == 'smile'
@@ -73,7 +74,8 @@ class ProspectsController < ApplicationController
     if @prospect.update_attributes(prospect_params)
       @prospect.update_column :canvassed, true if params[:go] == 'walk'
       @prospect.update_column :called, true if params[:go] == 'smile'
-      redirect_to prospects_path(go: params[:go])
+      redirect_to @prospect if params[:go]
+      redirect_to prospects_path unless params[:go]
     else
       render :show
     end

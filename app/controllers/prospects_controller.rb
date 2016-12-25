@@ -14,7 +14,7 @@ class ProspectsController < ApplicationController
       terms = ['company like ?', "%#{value}%"]
     elsif value =  params[:phon] || session[:phon]
       session[:phon] = params[:phon] if params[:phon]
-      terms = ['company_phone like ?', "#{value}"]
+      terms = ['company_phone like ?', "%#{value}%"]
     end
     if params[:list_number]
       primary_terms.merge!(list_number: params[:list_number])

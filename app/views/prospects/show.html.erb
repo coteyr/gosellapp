@@ -1,6 +1,7 @@
 <% provide(:title, "Making Sales a Competitive Sport") %>
 <%= row do %>
   <div class="col-md-6">
+  <%= row do %>
     <%= well @prospect.company, subheading: "<strong>Campaign:</strong> #{@prospect.campaign } | <strong> List#:</strong> #{@prospect.list_number}" do %>
       <%= row do %>
         <div class="col-xs-7">

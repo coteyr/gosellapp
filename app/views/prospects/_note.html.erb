@@ -3,10 +3,14 @@
 <% # @Last Modified by:   Robert D. Cotey II <coteyr@coteyr.net> %>
 <% # @Last Modified time: 2016-12-22 15:39:31 %>
 
-<% if !n.new_record? %>
-  <%= row do %>
-    <div class="col-xs-12">
-       Note: <%= n.created_at.strftime("%m/%d/%y") %> - <%= n.detail %>
-     </div>
-   <% end %>
- <% end %>
+<% @prospect.notes.each do |n| %>
+  <% if !n.new_record? %>
+    <% if n.detail.present? %> 
+      <div class="row">
+        <div class="col-xs-12">
+          Note: <%= n.created_at.strftime("%m/%d/%y") %> - <%= n.detail %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

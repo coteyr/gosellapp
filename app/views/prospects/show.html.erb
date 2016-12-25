@@ -57,8 +57,8 @@
       <%= row pad: false do %>
         <%= panel_footer do %>
           <%= button 'More', '#more', data: {toggle: 'collapse'}, role: 'button', type: 'info', size: 'sm' %>
-          <%= button 'Edit', edit_prospect_path(@prospect), size: 'sm', type: 'warning' %>
-          <%= button 'Delete', @prospect, method: :delete, data: { confirm: 'Are you sure you want to delete Prospect?'}, size: 'sm', type: 'danger' %>
+          <%= button 'Edit', edit_prospect_path(@prospect, go: params[:go]), size: 'sm', type: 'warning' %>
+          <%= button 'Delete', prospect_path(@prospect, go: params[:go]), method: :delete, data: { confirm: 'Are you sure you want to delete Prospect?'}, size: 'sm', type: 'danger' %>
           <%= button '<span class="fa fa-legal" aria-hidden="true"> Result</span>'.html_safe, '#result-form', type: 'primary', size: '', class: 'pull-right', data: {toggle: 'collapse', role: 'button'} %>
         <% end %>
       <% end %>

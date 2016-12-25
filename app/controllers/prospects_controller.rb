@@ -81,7 +81,7 @@ class ProspectsController < ApplicationController
 
   def destroy
     @prospect.destroy
-    redirect_to prospects_url, notice: 'Prospect was successfully deleted.'
+    redirect_to prospects_url(go: params[:go]), notice: 'Prospect was successfully deleted.'
   end
 
   def reset

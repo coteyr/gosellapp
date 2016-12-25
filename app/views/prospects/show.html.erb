@@ -103,8 +103,8 @@
           <div class="row">
             <div class="col-xs-12">
               <a href="#more" class="btn btn-info btn-sm gradient raised round" role="button" data-toggle="collapse">More</a>
-              <%= link_to "Edit", edit_prospect_path(@prospect), class: "btn btn-warning btn-sm gradient raised round" %>
-              <%= link_to "Delete", @prospect, method: :delete, data: { confirm: 'Are you sure you want to delete Prospect?'}, class: "btn btn-danger btn-sm gradient raised round" %>
+              <%= link_to "Edit", edit_prospect_path(@prospect, go: params[:go]), class: "btn btn-warning btn-sm gradient raised round" %>
+              <%= link_to "Delete", prospect_path(@prospect, go: params[:go]), method: :delete, data: { confirm: 'Are you sure you want to delete Prospect?'}, class: "btn btn-danger btn-sm gradient raised round" %>
               <a data-target="#result-form,#result-toolbar,#default-toolbar" class="btn btn-primary gradient raised round pull-right" role="button" data-toggle="collapse"><span class="fa fa-legal" aria-hidden="true"> Result</a>
             </div>
           </div>

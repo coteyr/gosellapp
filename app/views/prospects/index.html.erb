@@ -1,53 +1,29 @@
 <% provide(:title, "Making Sales a Competitive Sport") %>
 
-<div id="agent-view">
-  <div class="container-fluid">
-    <div class="panel panel-default col-md-12" id="panel-container">
-      <div class="panel-heading">
-
-        <div class="row">
-          <div class="col-md-6">
-            <strong>Listing Prospects</strong>
-          </div>
-          
-          <div class="col-md-6 right">
-              <div class="form-group">
-                <%= link_to "Export CSV", prospects_path(format: "csv"), class: 'btn btn-primary gradient round raised btn-xs' %>
-              </div>
-          </div>
-          
-        </div>
+<%= row do %>
+  <%= well 'Listing Prospects' do %>
+    <%= button 'Export CSV', prospects_path(format: "csv"), type: 'primary', class: 'pull-right' %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>UserID</th>
+            <th>Campaign</th>
+            <th>List#</th>
+            <th>Company</th>
+            <th>Co Phone</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Full Name</th>
+            <th>Title</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render partial: 'prospect', collection: @prospects %>
+        </tbody>
+      </table>
+      <div class="row center">
+        <div class="col-md-12 panel-footer"><%= paginate @prospects %></div>
       </div>
-      <div class="container-fluid">
-        <div class="col-xs-12">
-          <br>
-          <table border="1" width="100%">
-            <tr background="black">
-              <th>UserID</th><th>Campaign</th><th>List#</th><th>Company</th>
-              <th>Co Phone</th><th>City</th><th>State</th><th>Full Name</th><th>Title</th>
-              <th colspan="2"></th>
-            </tr>
-            
-            <% @prospects.each do |p| %>
-            <tr>
-              <td><%= p.user_id %></td><td><%= p.campaign %></td><td><%= p.list_number %></td><td><%= link_to p.company, p %></td>
+  <% end %>
+<% end %>
 
-              <td><%= p.company_phone %></td><td><%= p.city %></td><td><%= p.state %></td><td><%= p.first_name %> <%= p.last_name %></td><td><%= p.title %></td>
-
-              <td><%= link_to "Edit", edit_prospect_path(p) %></td>
-              <td><%= link_to "Delete", p, method: :delete, data: { confirm: 'Are you sure?'} %></td>
-            </tr>
-            <% end %>
-          </table>
-        </div>
-        
-
-        
-      </div>
-      
-      <div class="panel-footer">
-        <div class="row center"><%= paginate @prospects %></div>
-      </div>
-    </div>
-  </div>
-</div>

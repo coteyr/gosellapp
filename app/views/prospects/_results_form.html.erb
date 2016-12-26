@@ -1,27 +1,19 @@
 <!--This form should only appear when clicking on the "Result" button-->
+<%= collapseable_well "Details", 'result-form' do %>
 
-    <%= form_for @prospect, html: {id: :myform } do |f| %>
+  <%= form_for @prospect, html: {id: :myform } do |f| %>
 
     <% if @prospect.errors.any? %>
-    <div id="error_explanation">
-      <p class="alert alert-danger"><%= pluralize(@prospect.errors.count, "error") %> prohibited this result from being saved:</p>
+      <div id="error_explanation">
+        <p class="alert alert-danger"><%= pluralize(@prospect.errors.count, "error") %> prohibited this result from being saved:</p>
 
-      <ul>
-      <% @prospect.errors.full_messages.each do |message| %>
-        <p class="alert alert-danger"><em>&nbsp; * <%= message %></em></p>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div id="result-form" class="collapse">
-    <div class="row">
-      <div class="col-xs-12"><hr></div>
-    </div>
-    <div class="row">
-      <div class="col-xs-10"></div>
-      <div class="col-xs-2"><a data-target="#result-form,#result-toolbar,#default-toolbar" class="btn btn-warning round raised btn-xs" role="button" data-toggle="collapse"><span class="fa fa-close"></span></a>
+        <ul>
+        <% @prospect.errors.full_messages.each do |message| %>
+          <p class="alert alert-danger"><em>&nbsp; * <%= message %></em></p>
+        <% end %>
+        </ul>
       </div>
-    </div>
+    <% end %>
 
 
     <!--The following row is for new Notes FORM which will only have the "detail" field-->
@@ -106,11 +98,14 @@
   </div>
 
     <%= hidden_field_tag :go, params[:go] if params[:go] %>
+    <%= panel_footer do %>
+      <a data-target="#result-form" class="btn btn-default round raised btn-sm" role="button" data-toggle="collapse">Back</a>
+    <% end %>
     <div class="panel-footer">
       <div id="result-toolbar" class="collapse">
         <div class="row">
           <div class="col-xs-6">
-            <a data-target="#result-form,#result-toolbar,#default-toolbar" class="btn btn-default round raised btn-sm" role="button" data-toggle="collapse">Back</a>
+
           </div>
 
           <div class="col-xs-6">
@@ -122,5 +117,7 @@
 
 
 <script type="text/javascript">
-  window.onload = function() { document.myform.action = getLocationConstant(); }
+  // window.onload = function() { document.myform.action = getLocationConstant(); } Does not work without ssl.
 </script>
+
+<% end %>

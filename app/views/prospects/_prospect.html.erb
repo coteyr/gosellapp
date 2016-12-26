@@ -1,0 +1,18 @@
+<% # @Author: Robert D. Cotey II <coteyr@coteyr.net> %>
+<% # @Date:   2016-12-24 17:12:57 %>
+<% # @Last Modified by:   Robert D. Cotey II <coteyr@coteyr.net> %>
+<% # @Last Modified time: 2016-12-24 17:12:57 %>
+
+<tr>
+  <td><%= prospect.user_id %></td>
+  <td><%= prospect.campaign %></td>
+  <td><%= prospect.list_number %></td>
+  <td><%= link_to prospect.company, p %></td>
+  <td><%= prospect.company_phone %></td>
+  <td><%= prospect.city %></td>
+  <td><%= prospect.state %></td>
+  <td><%= prospect.first_name %> <%= prospect.last_name %></td>
+  <td><%= prospect.title %></td>
+  <td><%= button "Edit", edit_prospect_path(prospect) %></td>
+  <td><%= button "Delete", prospect, method: :delete, data: { confirm: 'Are you sure?', type: 'error'} %></td>
+</tr>

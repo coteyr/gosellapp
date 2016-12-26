@@ -1,84 +1,27 @@
-    <!--Additional fields for the prospective company-->
-      <div id="more" class="collapse">
-        <div class="row">
-          <div class="col-xs-12"><hr></div>
-        </div>
-        <div class="row">
-          <div class="col-xs-10">
-            <em>More about <%= @prospect.company %></em>
-          </div>
-          <div class="col-xs-2">
-            <a href="#more" data-toggle="collapse" class="btn btn-default btn-xs" type="button" >
-              <span class="fa fa-close"></span></a>
-          </div>
-        </div>
-        <div class="row">
-          <% if @prospect.numberofemployees.present? %>
-            <div class="col-xs-6"># of Empl: &nbsp; <%= @prospect.numberofemployees %></div>
-          <% end %>
-          <% if @prospect.county.present? %>
-            <div class="col-xs-6"> County: &nbsp; <%= @prospect.county %></div>
-          <% end %>
+<%= collapseable_well "More About #{@prospect.company}", 'more' do %>
+  <!--Additional fields for the prospective company-->
+  <%= row do %>
+    <div class="col-xs-6">
+      <%= data_pair '# of Empl:', @prospect, :numberofemployees %>
+      <%= data_pair 'sic:', @prospect, :sic %>
+      <%= data_pair 'Other 1:', @prospect, :other1 %>
+      <%= data_pair 'Other 3:', @prospect, :other1 %>
+      <%= data_pair 'Other 4:', @prospect, :other1 %>
+      <%= data_pair 'Other 7:', @prospect, :other1 %>
+      <%= data_pair 'Lead Owner', current_user, :name %>
+      <%= data_pair 'Canvassed', @prospect, :canvassed %>
+    </div>
+    <div class="col-xs-6">
+      <%= data_pair 'County:', @prospect, :county %>
+      <%= data_pair 'Fax:', @prospect, :fax %>
+      <%= data_pair 'Other 2:', @prospect, :other1 %>
+      <%= data_pair 'Other 4:', @prospect, :other1 %>
+      <%= data_pair 'Other 6:', @prospect, :other1 %>
+      <%= data_pair 'Other 8:', @prospect, :other1 %>
+      <%= data_pair 'Source:', @prospect, :source %>
+      <%= data_pair 'Called:', @prospect, :called %>
+    </div>
+  <% end %>
+  <%= render partial: 'result', collection: @prospect.results %>
+<% end %>
 
-
-          <% if @prospect.sic.present? %>
-            <div class="col-xs-6">sic: &nbsp; <%= @prospect.sic %></div>
-          <% end %>
-          <% if @prospect.fax.present? %>
-            <div class="col-xs-6">Fax: &nbsp; <%= @prospect.fax %></div>
-          <% end %>
-
-          <% if @prospect.other1.present? %>
-            <div class="col-xs-6">Other 1: &nbsp; <%= @prospect.other1 %></div>
-          <% end %>
-          <% if @prospect.other2.present? %>
-            <div class="col-xs-6">Other 2: &nbsp; <%= @prospect.other2 %></div>
-          <% end %>
-
-          <% if @prospect.other3.present? %>
-            <div class="col-xs-6">Other 3: &nbsp; <%= @prospect.other3 %></div>
-          <% end %>
-          <% if @prospect.other4.present? %>
-            <div class="col-xs-6">Other 4: &nbsp; <%= @prospect.other4 %></div>
-          <% end %>
-
-          <% if @prospect.other5.present? %>
-            <div class="col-xs-6">Other 5: &nbsp; <%= @prospect.other5 %></div>
-          <% end %>
-          <% if @prospect.other6.present? %>
-            <div class="col-xs-6">Other 6: &nbsp; <%= @prospect.other6 %></div>
-          <% end %>
-
-          <% if @prospect.other7.present? %>
-            <div class="col-xs-6">Other 7: &nbsp; <%= @prospect.other7 %></div>
-          <% end %>
-          <% if @prospect.other8.present? %>
-            <div class="col-xs-6">Other 8: &nbsp; <%= @prospect.other8 %></div>
-          <% end %>
-        </div>
-
-        <div class="row">
-          <div class="col-xs-6">Lead Owner: &nbsp; <%= current_user.first_name %> <%= current_user.last_name %></div>
-          <% if @prospect.source.present? %>
-            <div class="col-xs-6">Source: &nbsp; <%= @prospect.source %></div>
-          <% end %>
-        </div>
-
-        <div class="row">
-          <div class="col-xs-6">Canvassed: &nbsp; <%= @prospect.canvassed %></div>        
-          <div class="col-xs-6">Called: &nbsp; <%= @prospect.called %></div>         
-        </div>
-        
-        <% if @prospect.results.present? %>
-          <div class="row">
-            <div class="col-xs-6">Last Disposition</div>
-            <div class="col-xs-6"><%= @prospect.results.last.disposition %></div>
-          </div>
-          <div class="row">
-            <div class="col-xs-4">Coord: <%= @prospect.results.last.coordinates %></div>
-            <div class="col-xs-4">Lat: <%= @prospect.results.last.latitude %></div>
-            <div class="col-xs-4">Long: <%= @prospect.results.last.longitude %></div>
-          </div>
-        <% end %>
-        
-      </div>

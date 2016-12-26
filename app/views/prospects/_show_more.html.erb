@@ -23,5 +23,8 @@
     </div>
   <% end %>
   <%= render partial: 'result', collection: @prospect.results %>
+  <%= panel_footer do %>
+    <%= button 'Back', '#more', data: {target: '#more', toggle: 'collapse'}, size: 'sm', type: 'default', class: 'pull-right' %>
+    <% end %>
 <% end %>
 

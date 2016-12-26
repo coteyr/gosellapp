@@ -35,7 +35,7 @@ module ApplicationHelper
     unless objekt.send(method).blank?
       to_return += title
       to_return += '&nbsp;'
-      to_return += objekt.send(method)
+      to_return += objekt.send(method).to_s
     end
     to_return += '</div>'
     to_return.html_safe

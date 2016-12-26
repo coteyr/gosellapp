@@ -60,7 +60,9 @@
 
 
   <%= panel size: 6, offset: 0 do %>
-    b
+  <% if @prospect.results.present? %>
+    <%= render 'shared/leaderboard' %>
+  <% end %>
   <% end %>
 <% end %>
 
@@ -103,7 +105,7 @@
       </div>
       </div>
     </div>
-<%= render 'shared/leaderboard' %>
+
 
 
   </div>

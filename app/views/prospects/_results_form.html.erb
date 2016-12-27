@@ -100,7 +100,14 @@
     <%= hidden_field_tag :go, params[:go] if params[:go] %>
     <%= panel_footer do %>
       <a data-target="#result-form" class="btn btn-default round raised btn-sm" role="button" data-toggle="collapse">Back</a>
+      <div class="col-xs-6">
+            <%= f.submit 'Disposition', class: "btn btn-primary gradient round raised pull-right" %>
+          </div>
     <% end %>
+
+  </div>
+
+
     <div class="panel-footer">
       <div id="result-toolbar" class="collapse">
         <div class="row">
@@ -108,9 +115,7 @@
 
           </div>
 
-          <div class="col-xs-6">
-            <%= f.submit 'Disposition', class: "btn btn-primary gradient round raised pull-right" %>
-          </div>
+
         </div>
       </div>
     <% end %>

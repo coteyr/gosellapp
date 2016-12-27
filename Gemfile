@@ -16,6 +16,10 @@ gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
 group :development, :test do
   gem 'sqlite3', '1.3.11'
   gem 'byebug',  '9.0.0', platform: :mri
+  gem 'capistrano'# , '~> 3.2.0', require: false
+  gem 'capistrano-rails',   '~> 1.1', require: false
+  gem 'capistrano-bundler', '~> 1.1', require: false
+  gem 'capistrano3-delayed-job', '~> 1.0'
 end
 
 group :development do
@@ -25,8 +29,10 @@ group :development do
   gem 'spring-watcher-listen', '2.0.0'
 end
 
-group :production do
-  gem 'pg', '0.18.4'
+group :production, :staging do
+  gem 'mysql2', '~> 0.3.18'
+  gem 'execjs'
+  gem 'therubyracer'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

@@ -6,6 +6,7 @@ class Prospect < ApplicationRecord
   accepts_nested_attributes_for :results, allow_destroy: true
   validates :company, presence: true
   validates :list_id, presence: true
+  belongs_to :list
   scope :uncalled, -> { where.not(called: true) }
   scope :uncanvassed, -> { where.not(canvassed: true) }
   scope :unlocked, -> { where.not(locked_at: (DateTime.now - 30.seconds)..DateTime.now).or(where(locked_at: nil)) }

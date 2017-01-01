@@ -1,75 +1,76 @@
 <% provide(:title, "Making Sales a Competitive Sport") %>
 <%= row do %>
   <div class="col-md-6">
-  <%= row do %>
-    <%= well @prospect.company, subheading: "<strong>Campaign:</strong> #{@prospect.campaign } | <strong> List#:</strong> #{@prospect.list_number}" do %>
-      <%= row do %>
-        <div class="col-xs-7">
-          <%= primary_contact(@prospect, :first_name) %>
-          <%= primary_contact(@prospect, :last_name) %>
-        </div>
-        <div class="col-xs-4">
-          <%= primary_contact(@prospect, :title) %>
-        </div>
-        <div class="col-xs-1">
-          <button type="button" class="btn btn-info gradient round raised btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span><span class="caret"></span>
-              </button>
-        </div>
-      <% end %>
-      <% unless @prospect.company_phone.blank? %>
+    <%= row do %>
+      <%= well @prospect.company, subheading: "<strong>Campaign:</strong> #{@prospect.campaign } | <strong> List#:</strong> #{@prospect.list.list_id}" do %>
         <%= row do %>
-          <div class="col-xs-6"><span class="fa fa-phone"></span> <%= @prospect.company_phone %></div>
-        <% end %>
-      <% end %>
-      <% unless @prospect.address.blank? %>
-        <%= row do %>
-          <div class="col-xs-12">
-            <%= @prospect.address %>
-            <% if @prospect.address2.present? %>&nbsp; &nbsp; - &nbsp; &nbsp; <%= @prospect.address2 %><% end %>
+          <div class="col-xs-7">
+            <%= primary_contact(@prospect, :first_name) %>
+            <%= primary_contact(@prospect, :last_name) %>
+          </div>
+          <div class="col-xs-4">
+            <%= primary_contact(@prospect, :title) %>
+          </div>
+          <div class="col-xs-1">
+            <button type="button" class="btn btn-info gradient round raised btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span><span class="caret"></span>
+                </button>
           </div>
         <% end %>
-      <% end %>
-      <% if @prospect.city.present? || @prospect.state.present? %>
+        <% unless @prospect.company_phone.blank? %>
+          <%= row do %>
+            <div class="col-xs-6"><span class="fa fa-phone"></span> <%= @prospect.company_phone %></div>
+          <% end %>
+        <% end %>
+        <% unless @prospect.address.blank? %>
+          <%= row do %>
+            <div class="col-xs-12">
+              <%= @prospect.address %>
+              <% if @prospect.address2.present? %>&nbsp; &nbsp; - &nbsp; &nbsp; <%= @prospect.address2 %><% end %>
+            </div>
+          <% end %>
+        <% end %>
+        <% if @prospect.city.present? || @prospect.state.present? %>
+          <%= row do %>
+            <div class="col-xs-12">
+              <%= @prospect.city %>
+              <% if @prospect.state.present? %>, <%= @prospect.state %> &nbsp;<% end %>
+            </div>
+          <% end %>
+          <%= row do %>
+            <div class="col-xs-12"><%= @prospect.zip %></div>
+          <% end %>
+        <% end %>
         <%= row do %>
-          <div class="col-xs-12">
-            <%= @prospect.city %>
-            <% if @prospect.state.present? %>, <%= @prospect.state %> &nbsp;<% end %>
+          <div class="col-xs-6">
+            <% unless primary_contact(@prospect, :email).blank? %>
+              <span class="glyphicon glyphicon-envelope"></span><%= mail_to primary_contact(@prospect, :email) %>
+            <% end %>
+          </div>
+          <div class="col-xs-6">
+            <% unless @prospect.website.blank? %>
+              <span class="glyphicon glyphicon-globe"></span> <%= link_to @prospect.website, @prospect.website, target: '_blank' %>
+            <% end %>
           </div>
         <% end %>
-        <%= row do %>
-          <div class="col-xs-12"><%= @prospect.zip %></div>
-        <% end %>
-      <% end %>
-      <%= row do %>
-        <div class="col-xs-6">
-          <% unless primary_contact(@prospect, :email).blank? %>
-            <span class="glyphicon glyphicon-envelope"></span><%= mail_to primary_contact(@prospect, :email) %>
-          <% end %>
-        </div>
-        <div class="col-xs-6">
-          <% unless @prospect.website.blank? %>
-            <span class="glyphicon glyphicon-globe"></span> <%= link_to @prospect.website, @prospect.website, target: '_blank' %>
-          <% end %>
-        </div>
-      <% end %>
-      <%= render partial: 'note', collection: @prospect.notes %>
+        <%= render partial: 'note', collection: @prospect.notes %>
 
-      <div id="default-toolbar" class="collapse in">
-        <%= row pad: false do %>
-          <%= panel_footer do %>
-            <%= button 'More', '#more', data: {toggle: 'collapse'}, role: 'button', type: 'info', size: 'sm' %>
-            <%= button 'Edit', edit_prospect_path(@prospect, go: params[:go]), size: 'sm', type: 'warning' %>
-            <%= button 'Delete', prospect_path(@prospect, go: params[:go]), method: :delete, data: { confirm: 'Are you sure you want to delete Prospect?'}, size: 'sm', type: 'danger' %>
-            <%= button '<span class="fa fa-legal" aria-hidden="true"> Result</span>'.html_safe, '#result-form', type: 'primary', size: '', class: 'pull-right', data: {toggle: 'collapse', role: 'button'} %>
+        <div id="default-toolbar" class="collapse in">
+          <%= row pad: false do %>
+            <%= panel_footer do %>
+              <%= button 'More', '#more', data: {toggle: 'collapse'}, role: 'button', type: 'info', size: 'sm' %>
+              <%= button 'Edit', edit_prospect_path(@prospect, go: params[:go]), size: 'sm', type: 'warning' %>
+              <%= button 'Delete', prospect_path(@prospect, go: params[:go]), method: :delete, data: { confirm: 'Are you sure you want to delete Prospect?'}, size: 'sm', type: 'danger' %>
+              <%= button '<span class="fa fa-legal" aria-hidden="true"> Result</span>'.html_safe, '#result-form', type: 'primary', size: '', class: 'pull-right', data: {toggle: 'collapse', role: 'button'} %>
+            <% end %>
           <% end %>
-        <% end %>
-      </div>
-    <% end %>
-    <%= row do %>
-      <%= render 'prospects/show_more' %>
-    <% end %>
-    <%= row do %>
-      <%= render "results_form" %>
+        </div>
+      <% end %>
+      <%= row do %>
+        <%= render 'prospects/show_more' %>
+      <% end %>
+      <%= row do %>
+        <%= render "results_form" %>
+      <% end %>
     <% end %>
   </div>
 

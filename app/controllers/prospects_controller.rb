@@ -16,10 +16,9 @@ class ProspectsController < ApplicationController
       session[:phon] = params[:phon] if params[:phon]
       terms = ['company_phone like ?', "%#{value}%"]
     end
-    if value = params[:list_number]  || session[:list_number]
-      session[:list_number] = params[:list_number] if params[:list_number]
-      primary_terms.merge!(list_number: value)
-      @goList = Prospect.select(:list_number).order(:list_number).distinct
+    if value = params[:list_id]  || session[:list_id]
+      session[:list_id] = params[:list_id] if params[:list_id]
+      primary_terms.merge!(list_id: value)
     end
     if params[:go] == 'walk' or params[:go] == 'smile'
       @prospect = current_user.prospects.unlocked.uncalled.where(terms).where(primary_terms).first if params[:go] == 'smile'

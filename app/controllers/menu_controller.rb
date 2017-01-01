@@ -3,6 +3,6 @@ class MenuController < ApplicationController
     session[:loc] = nil
     session[:co]  = nil
     session[:phon] = nil
-    session[:list_number] = nil
+    session[:list_id] = nil
   end
 end

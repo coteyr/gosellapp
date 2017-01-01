@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def select_list_menu
-    @goList = List.select(:list_id).order(:list_id).distinct
+    @goList = List.all.order(:list_id).distinct
   end
 
 

@@ -21,10 +21,11 @@ class ProspectsController < ApplicationController
       primary_terms.merge!(list_id: value)
     end
     if params[:go] == 'walk' or params[:go] == 'smile'
-      @prospect = current_user.prospects.unlocked.uncalled.where(terms).where(primary_terms).first if params[:go] == 'smile'
-      @prospect = current_user.prospects.unlocked.uncanvassed.where(terms).where(primary_terms).first if params[:go] == 'walk'
+      @prospect = current_user.prospects.unlocked(current_user).uncalled.where(terms).where(primary_terms).first if params[:go] == 'smile'
+      @prospect = current_user.prospects.unlocked(current_user).uncanvassed.where(terms).where(primary_terms).first if params[:go] == 'walk'
       if @prospect
         @prospect.update_column :locked_at, DateTime.now
+        @prospect.update_column :locked_by_id, current_user.id
         render action: (params[:go] == 'walk' ? 'canvass' : 'call') # when I know more about these different views I suspect that they will different partials on show and we can loose this smell.
       else
         @prospects = []
@@ -38,12 +39,6 @@ class ProspectsController < ApplicationController
       end
     end
   end
-  # Following 4 lines for importing from csv
-  def import
-    Prospect.import(params[:file])
-    redirect_to root_url, notice: "Prospects imported."
-  end
-
   # Allowing for nested form to create results and notes
   def show
     @result = Result.new

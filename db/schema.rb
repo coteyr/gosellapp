@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170101143444) do
+ActiveRecord::Schema.define(version: 20170101153950) do
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(version: 20170101143444) do
     t.boolean  "called",                        default: false
     t.datetime "locked_at"
     t.integer  "list_id"
+    t.integer  "locked_by_id"
     t.index ["user_id"], name: "index_prospects_on_user_id"
   end
 

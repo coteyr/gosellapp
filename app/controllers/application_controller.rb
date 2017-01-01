@@ -2,9 +2,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_filter :select_list_menu
   before_action :configure_permitted_parameters, if: :devise_controller?
-  
+
   def select_list_menu
-    @goList = Prospect.select(:list_number).order(:list_number).distinct
+    @goList = List.select(:list_id).order(:list_id).distinct
   end
 
 

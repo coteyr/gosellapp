@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161222175035) do
+ActiveRecord::Schema.define(version: 20170101143444) do
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -35,6 +35,12 @@ ActiveRecord::Schema.define(version: 20161222175035) do
     t.string   "status",     default: "pending"
   end
 
+  create_table "lists", force: :cascade do |t|
+    t.string   "list_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "notes", force: :cascade do |t|
     t.text     "detail",      limit: 500
     t.integer  "prospect_id"
@@ -45,7 +51,6 @@ ActiveRecord::Schema.define(version: 20161222175035) do
 
   create_table "prospects", force: :cascade do |t|
     t.string   "campaign",          limit: 64
-    t.integer  "list_number",       limit: 10
     t.time     "time_on_contact"
     t.string   "status",            limit: 32
     t.string   "source",            limit: 32
@@ -107,18 +112,19 @@ ActiveRecord::Schema.define(version: 20161222175035) do
     t.boolean  "canvassed",                     default: false
     t.boolean  "called",                        default: false
     t.datetime "locked_at"
+    t.integer  "list_id"
     t.index ["user_id"], name: "index_prospects_on_user_id"
   end
 
   create_table "results", force: :cascade do |t|
     t.string   "disposition"
+    t.datetime "event"
     t.integer  "prospect_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "user_id"
     t.string   "location"
     t.string   "activity"
-    t.datetime "event"
     t.float    "coordinates"
     t.float    "latitude"
     t.float    "longitude"

@@ -40,9 +40,10 @@
             <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
           </div>
         </div>
-  
+
 
       </div>
+      <%= f.hidden_field :permission_level, value: 'Normal' %>
       <div class="panel-footer">
         <div class="btn-toolbar">
 

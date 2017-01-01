@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resources :results, only: [:create, :edit, :update, :destroy]
   end
 
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'registrations' }
   root 'menu#index'
   get "menu" => "prospects#menu"
   get "update_accessible" => "results#update_accessible"

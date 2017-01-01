@@ -12,6 +12,7 @@ gem 'devise'
 gem 'kaminari'
 gem 'delayed_job_active_record'
 gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
+gem 'cancancan'
 
 group :development, :test do
   gem 'sqlite3', '1.3.11'

@@ -3,22 +3,34 @@
 <%= row do %>
   <%= panel size: 6, offset: 3 do %>
     <div id="accordion">
-      <%= menu_toggle 'Smile & Dial', 'collapse1' do %>
-        <%= render partial: 'smile' %>
+      <% if can? :index, Prospect %>
+        <%= menu_toggle 'Smile & Dial', 'collapse1' do %>
+          <%= render partial: 'smile' %>
+        <% end %>
+        <%= menu_toggle 'Walk & Talk', 'collapse2' do %>
+          <%= render partial: 'walk' %>
+        <% end %>
+        <%= menu_toggle 'Search', 'collapse3' do %>
+          <%= render partial: 'search' %>
+        <% end %>
+        <%= menu_button 'List all Leads', prospects_path %>
+        <% if can? :index, List %>
+          <%= menu_button 'List Management', lists_path %>
+        <% end %>
       <% end %>
-      <%= menu_toggle 'Walk & Talk', 'collapse2' do %>
-        <%= render partial: 'walk' %>
+      <% if can? :create, Prospect %>
+        <%= menu_button 'Add Lead(s)', new_prospect_path %>
       <% end %>
-      <%= menu_toggle 'Search', 'collapse3' do %>
-        <%= render partial: 'search' %>
+      <% if can? :index, Prospect %>
+        <%= menu_button 'Appointments', '#' %>
+        <%= menu_button 'Follow-up', '#' %>
       <% end %>
-      <%= menu_button 'List all Leads', prospects_path %>
-      <%= menu_button 'List Management', lists_path %>
-      <%= menu_button 'Add Lead(s)', new_prospect_path %>
-      <%= menu_button 'Appointments', '#' %>
-      <%= menu_button 'Follow-up', '#' %>
-      <%= menu_button 'Background Tasks', jobs_path %>
-      <%= menu_button 'Imports', imports_path %>
+      <% if can? :index, Delayed::Job %>
+        <%= menu_button 'Background Tasks', jobs_path %>
+      <% end %>
+      <% if can? :create, Import %>
+        <%= menu_button 'Imports', imports_path %>
+      <% end %>
     </div>
   <% end %>
 <% end %>

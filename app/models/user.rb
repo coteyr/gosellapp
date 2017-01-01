@@ -13,10 +13,11 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
   def admin?
-    self.permission_level.casecmp('Admin').zero? || self.username = 'coteyr@coteyr.net'
+    (self.permission_level == 'Admin' or self.username == 'coteyr@coteyr.net')
+    #self.permission_level and self.permission_level == ('Admin') or self.username = 'coteyr@coteyr.net'
   end
   def manager?
-    self.permission_level.casecmp('Manager').zero?
+    self.permission_level and self.permission_level.casecmp('Manager').zero?
   end
   def normal?
     self.permission_level.nil? || (!admin? and !manager?)

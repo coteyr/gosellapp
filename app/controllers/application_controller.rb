@@ -1,6 +1,9 @@
 class ApplicationController < ActionController::Base
+  include CanCan::ControllerAdditions
   protect_from_forgery with: :exception
+  before_filter :authenticate_user!
   before_filter :select_list_menu
+
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def select_list_menu

@@ -1,4 +1,5 @@
 class ImportsController < ApplicationController
+  load_and_authorize_resource
   def new
     @import = Import.new
   end

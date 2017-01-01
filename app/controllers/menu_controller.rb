@@ -1,5 +1,6 @@
 class MenuController < ApplicationController
   def index
+    authorize! :show, current_user
     session[:loc] = nil
     session[:co]  = nil
     session[:phon] = nil

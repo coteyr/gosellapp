@@ -1,0 +1,15 @@
+<% # @Author: Robert D. Cotey II <coteyr@coteyr.net> %>
+<% # @Date:   2017-01-01 10:23:21 %>
+<% # @Last Modified by:   Robert D. Cotey II <coteyr@coteyr.net> %>
+<% # @Last Modified time: 2017-01-01 10:23:21 %>
+
+<tr>
+  <td><%= list.id %></td>
+  <td><%= list.list_id %></td>
+  <td><%= l(list.created_at) %></td>
+  <td><%= list.prospects.count %></td>
+  <td><%= list.prospects.canvassed.count %></td>
+  <td><%= list.prospects.called.count %></td>
+  <td><%= button 'reset', list_reset_path(list), data: {confirm: 'Are you sure?'} %></td>
+  <td><%= button 'delete', list_path(list), data: {confirm: 'Are you sure? This will delete the prospects on the list as well.', method: 'delete'} %></td>
+</tr>

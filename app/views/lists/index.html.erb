@@ -1,0 +1,26 @@
+<% # @Author: Robert D. Cotey II <coteyr@coteyr.net> %>
+<% # @Date:   2017-01-01 10:19:20 %>
+<% # @Last Modified by:   Robert D. Cotey II <coteyr@coteyr.net> %>
+<% # @Last Modified time: 2017-01-01 10:19:20 %>
+
+<%= row do %>
+  <%= well "List Management" do %>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>List Number</th>
+          <th>Created At</th>
+          <th>Prospects</th>
+          <th>Canvassed</th>
+          <th>Called</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render partial: 'list', collection: @lists %>
+      </tbody>
+    </table>
+  <% end %>
+<% end %>

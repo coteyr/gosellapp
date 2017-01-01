@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :lists do
+    get :reset
+  end
   resources :imports
   resources :jobs
   resources :prospects do

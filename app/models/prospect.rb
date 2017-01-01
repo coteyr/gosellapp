@@ -7,6 +7,8 @@ class Prospect < ApplicationRecord
   validates :company, presence: true
   validates :list_id, presence: true
   belongs_to :list
+  scope :called, -> { where(called: true) }
+  scope :canvassed, -> { where(canvassed: true) }
   scope :uncalled, -> { where.not(called: true) }
   scope :uncanvassed, -> { where.not(canvassed: true) }
   scope :unlocked, -> { where.not(locked_at: (DateTime.now - 30.seconds)..DateTime.now).or(where(locked_at: nil)) }

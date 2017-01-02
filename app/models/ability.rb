@@ -5,12 +5,17 @@ class Ability
     user ||= User.new
     if user.admin?
       can :manage, :all
-    elsif user.normal?
-      can :show, user
-      can :read, Prospect
-    elsif user.manager?
-      can :manage, Import
     end
+    if user.manager?
+      can :manage, Import
+      can :manage, List
+      can :manage, Prospect
+    end
+    if user.normal? or user.manager?
+      can :show, user
+      can [:read, :edit], Prospect
+    end
+
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)

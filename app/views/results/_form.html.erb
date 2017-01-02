@@ -1,0 +1,72 @@
+<% # @Author: Robert D. Cotey II <coteyr@coteyr.net> %>
+<% # @Date:   2016-12-15 09:20:20 %>
+<% # @Last Modified by:   Robert D. Cotey II <coteyr@coteyr.net> %>
+<% # @Last Modified time: 2016-12-15 09:20:20 %>
+
+<%= form_for [@prospect, @result] do |f| %>
+  <%= hidden_field_tag :go, params[:go] if params[:go] %>
+  <%= f.hidden_field :activity, value: "activity-test" %>
+  <%= f.hidden_field :location, value: "location-test" %>
+  <%= f.hidden_field :time_on_contact, value: "toc-test" %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.hidden_field :coordinates, id: "Position1" %>
+  <%= f.hidden_field :latitude, id: "Latitude" %>
+  <%= f.hidden_field :longitude, id: "Longitude" %>
+  <div class="row">
+    <div class="col-xs-4">
+      <%= f.radio_button :disposition, 'appointment', data: { toggle:"collapse", target:"#event"} %>
+      <%= f.label :disposition, 'Appt Set' %>
+    </div>
+    <div class="col-xs-4">
+      <%= f.radio_button :disposition, 'follow-up', data: { toggle:"collapse", target:"#event"} %>
+      <%= f.label :disposition, 'Follow-up'%>
+    </div>
+    <div class="col-xs-4">
+      <%= f.radio_button :disposition, 'no-pitch' %>
+      <%= f.label :disposition, 'No Pitch' %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <%= f.radio_button :disposition, 'not-qualified' %>
+      <%= f.label :disposition, 'Not Qual' if f.object.new_record? %>
+    </div>
+    <div class="col-xs-4">
+      <%= f.radio_button :disposition, 'bad-record' %>
+      <%= f.label :disposition, 'Bad #/Rec' %>
+    </div>
+    <div class="col-xs-4">
+      <%= f.radio_button :disposition, 'not-interested' %>
+      <%= f.label :disposition, 'Not Int' %>
+    </div>
+  </div>
+  <div id="event" class="collapse">
+    <div class="row">
+      <div class="form-group col-xs-12">
+        <%= f.label :event, 'Date & Time' %><br>
+        <div class="input-group">
+          <%= f.text_field :event, class: 'form-control datetime' %>
+          <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= panel_footer do %>
+    <a data-target="#result-form" class="btn btn-default round raised btn-sm" role="button" data-toggle="collapse">Back</a>
+    <%= f.submit 'Disposition', class: "btn btn-primary gradient round raised pull-right" %>
+  <% end %>
+<% end %>
+<script type="text/javascript">
+  $('.datetime').datetimepicker();
+  <% if Rails.env.production? %>
+    window.onload = function() { document.myform.action = getLocationConstant(); } Does not work without ssl.
+  <% else %>
+    $( document ).ready(function() {
+      $('#Position1').val('27.961352,-82.472202')
+      $('#Latitude').val('27.961352')
+      $('#Longitude').val('-82.472202')
+    })
+  <% end %>
+</script>

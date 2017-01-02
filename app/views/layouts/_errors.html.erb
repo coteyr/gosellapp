@@ -1,0 +1,16 @@
+<% # @Author: Robert D. Cotey II <coteyr@coteyr.net> %>
+<% # @Date:   2017-01-02 10:06:23 %>
+<% # @Last Modified by:   Robert D. Cotey II <coteyr@coteyr.net> %>
+<% # @Last Modified time: 2017-01-02 10:06:23 %>
+
+<% if objekt.errors.any? %>
+  <div id="error_explanation">
+    <p class="alert alert-danger"><%= pluralize(objekt.errors.count, "error") %> prohibited this result from being saved:</p>
+
+    <ul>
+    <% objekt.errors.full_messages.each do |message| %>
+      <p class="alert alert-danger"><em>&nbsp; * <%= message %></em></p>
+    <% end %>
+    </ul>
+  </div>
+<% end %>

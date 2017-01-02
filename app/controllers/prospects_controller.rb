@@ -27,6 +27,7 @@ class ProspectsController < ApplicationController
       if @prospect
         @prospect.update_column :locked_at, DateTime.now
         @prospect.update_column :locked_by_id, current_user.id
+        @result = Result.new
         render action: (params[:go] == 'walk' ? 'canvass' : 'call') # when I know more about these different views I suspect that they will different partials on show and we can loose this smell.
       else
         @prospects = []

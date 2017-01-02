@@ -1,7 +1,7 @@
 # @Author: Robert D. Cotey II <coteyr@coteyr.net>
 # @Date:   2016-12-22 13:22:09
 # @Last Modified by:   Robert D. Cotey II <coteyr@coteyr.net>
-# @Last Modified time: 2017-01-02 10:01:27
+# @Last Modified time: 2017-01-02 10:20:36
 module ContentHelper
   def row(options={}, &block)
     to_return = '<div class="row container-fluid">' if !options[:pad] or options[:pad] == true
@@ -24,7 +24,7 @@ module ContentHelper
   def panel_footer(options={}, &block)
     to_return = '<div class="panel-footer">'
     to_return += with_output_buffer(&block)
-    to_return += '</div>'
+    to_return += '<div style="clear: both;"></div></div>'
     to_return.html_safe
   end
   def menu_button(title, url, options={})

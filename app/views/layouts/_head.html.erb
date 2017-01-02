@@ -10,6 +10,9 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
     <% javascript_include_tag "//maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_API_KEY']}" %>
     <%= javascript_include_tag "//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" %>
+    <%= javascript_include_tag "/js/moment.min.js" %>
+    <%= javascript_include_tag "/js/bootstrap-datetimepicker.min.js" %>
+    <%= stylesheet_link_tag "/css/bootstrap-datetimepicker.min.css" %>
     <%= csrf_meta_tags %>
     <%= render "layouts/shim" %>
   </head>

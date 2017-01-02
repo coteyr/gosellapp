@@ -1,6 +1,5 @@
 <!--This form should only appear when clicking on the "Result" button-->
 <%= collapseable_well "Details", 'result-form' do %>
-
   <%= form_for @prospect, html: {id: :myform } do |f| %>
 
     <% if @prospect.errors.any? %>
@@ -105,7 +104,6 @@
           </div>
     <% end %>
 
-  </div>
 
 
     <div class="panel-footer">
@@ -121,17 +119,17 @@
     <% end %>
 
 
+
+
+<% end %>
 <script type="text/javascript">
-<% if Rails.env.production? %>
-  window.onload = function() { document.myform.action = getLocationConstant(); } Does not work without ssl.
-<% else %>
-  $( document ).ready(function() {
-    $('#Position1').val('27.961352,-82.472202')
-    $('#Latitude').val('27.961352')
-    $('#Longitude').val('-82.472202')
-  })
-<% end %>
-
+  <% if Rails.env.production? %>
+    window.onload = function() { document.myform.action = getLocationConstant(); } Does not work without ssl.
+  <% else %>
+    $( document ).ready(function() {
+      $('#Position1').val('27.961352,-82.472202')
+      $('#Latitude').val('27.961352')
+      $('#Longitude').val('-82.472202')
+    })
+  <% end %>
 </script>
-
-<% end %>

@@ -8,15 +8,9 @@
     </div>
   <% end %>
   <%= hidden_field_tag :go, params[:go] %>
-<div id="agent-view">
-  <div class="container-fluid">
-    <div class="panel panel-default col-md-6" id="panel-container">
-      <div class="panel-heading">
-        <h2 class="panel-title">Edit / Update Prospect</h2>
-      </div>
-      <div class="container-fluid">
-
-       <div class="row">
+  <%= row do %>
+    <%= well 'Edit / Update Prospect', size: 6, offset: 3 do %>
+      <div class="row">
           <div class="form-group col-xs-6">
             <%= f.label :campaign %>
             <%= f.text_field :campaign, class: "form-control" %>
@@ -160,15 +154,13 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="panel-footer">
-        <div class="btn-toolbar">
+      <%= panel_footer do %>
+        <%= row do %>
           <%= link_to 'Cancel', @prospect, class: "btn btn-default gradient round raised btn-sm" %>
           <%= link_to "Delete", @prospect, method: :delete, data: { confirm: 'Are you sure you want to delete Prospect?'}, class: "btn btn-danger gradient round raised btn-sm" %>
           <%= f.submit class: "btn btn-primary gradient round raised pull-right" %>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
 <% end %>

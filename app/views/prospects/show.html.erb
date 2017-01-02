@@ -2,7 +2,7 @@
 <%= row do %>
   <div class="col-md-6">
     <%= row do %>
-      <%= well @prospect.company, subheading: "<strong>Campaign:</strong> #{@prospect.campaign } | <strong> List#:</strong> #{@prospect.list.list_id}" do %>
+      <%= well @prospect.company, subheading: "<strong>Campaign:</strong> #{@prospect.campaign } | <strong> List#:</strong> #{@prospect.list.list_id}", offset: 0 do %>
         <%= row do %>
           <div class="col-xs-7">
             <%= primary_contact(@prospect, :first_name) %>
@@ -53,23 +53,15 @@
           </div>
         <% end %>
         <%= render partial: 'note', collection: @prospect.notes %>
-
         <div id="default-toolbar" class="collapse in">
-          <%= row pad: false do %>
-            <%= panel_footer do %>
-              <%= button 'More', '#more', data: {toggle: 'collapse'}, role: 'button', type: 'info', size: 'sm' %>
-              <%= button 'Edit', edit_prospect_path(@prospect, go: params[:go]), size: 'sm', type: 'warning' %>
-              <%= button 'Delete', prospect_path(@prospect, go: params[:go]), method: :delete, data: { confirm: 'Are you sure you want to delete Prospect?'}, size: 'sm', type: 'danger' %>
-              <%= button '<span class="fa fa-legal" aria-hidden="true"> Result</span>'.html_safe, '#result-form', type: 'primary', size: '', class: 'pull-right', data: {toggle: 'collapse', role: 'button'} %>
-            <% end %>
+          <%= panel_footer do %>
+            <%= button 'More', '#more', data: {toggle: 'collapse'}, role: 'button', type: 'info', size: 'sm' %>
+            <%= button 'Edit', edit_prospect_path(@prospect, go: params[:go]), size: 'sm', type: 'warning' %>
+            <%= button 'Delete', prospect_path(@prospect, go: params[:go]), method: :delete, data: { confirm: 'Are you sure you want to delete Prospect?'}, size: 'sm', type: 'danger' %>
+            <%= button '<span class="fa fa-legal" aria-hidden="true"> Result</span>'.html_safe, '#result-form', type: 'primary', size: '', class: 'pull-right', data: {toggle: 'collapse', role: 'button'} %>
+            <div style="clear: both;"></div>
           <% end %>
         </div>
-      <% end %>
-      <%= row do %>
-        <%= render 'prospects/show_more' %>
-      <% end %>
-      <%= row do %>
-        <%= render "results_form" %>
       <% end %>
     <% end %>
   </div>
@@ -81,6 +73,16 @@
 
 <% end %>
 
+<%= row do %>
+  <div class="col-md-6">
+    <%= render 'prospects/show_more' %>
+  </div>
+<% end %>
+<%= row do %>
+  <div class="col-md-6">
+    <%= render "results_form" %>
+  </div>
+<% end %>
 
 
 

@@ -1,7 +1,7 @@
 # @Author: Robert D. Cotey II <coteyr@coteyr.net>
 # @Date:   2016-12-22 13:22:09
 # @Last Modified by:   Robert D. Cotey II <coteyr@coteyr.net>
-# @Last Modified time: 2016-12-24 17:51:50
+# @Last Modified time: 2017-01-02 10:01:27
 module ContentHelper
   def row(options={}, &block)
     to_return = '<div class="row container-fluid">' if !options[:pad] or options[:pad] == true
@@ -22,7 +22,7 @@ module ContentHelper
     to_return.html_safe
   end
   def panel_footer(options={}, &block)
-    to_return = '<div class="col-xs-12 panel-footer">'
+    to_return = '<div class="panel-footer">'
     to_return += with_output_buffer(&block)
     to_return += '</div>'
     to_return.html_safe
@@ -49,13 +49,14 @@ module ContentHelper
   end
   def collapseable_well(title, id, options={}, &block)
     to_return = "<div id='#{id}' class='collapse'>"
-    to_return += well(title, link: "<a href='##{id}' data-toggle='collapse' class='btn btn-default btn-xs pull-right' type='button' ><span class='fa fa-close'></span></a>", &block)
+    to_return += well(title, options.merge(link: "<a href='##{id}' data-toggle='collapse' class='btn btn-default btn-xs pull-right' type='button' ><span class='fa fa-close'></span></a>"), &block)
     to_return += '</div>'
     to_return.html_safe
   end
   def well(title, options={}, &block)
-    size = 12 || options[:size]
-    to_return =  "<div class='panel panel-default col-md-#{size}'>"
+    size = options[:size] || 12
+    offset = options[:offset] || 0
+    to_return =  "<div class='panel panel-default col-md-#{size} col-md-offset-#{offset}'>"
     to_return += '<div class="panel-heading">'
 
     to_return += '<h2 class="panel-title">'

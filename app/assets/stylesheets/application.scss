@@ -82,7 +82,7 @@ text-align: center;
 .row:not(:first-child) {
   margin-top: 20px;
 }
-.panel .panel-heading {
+.panel .panel-heading, .panel .panel-footer {
   margin-left: -15px;
   margin-right: -15px;
 }

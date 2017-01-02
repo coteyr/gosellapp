@@ -1,4 +1,4 @@
-<%= collapseable_well "More About #{@prospect.company}", 'more' do %>
+<%= collapseable_well "More About #{@prospect.company}", 'more', size: 12, offset: 0 do %>
   <!--Additional fields for the prospective company-->
   <%= row do %>
     <div class="col-xs-6">
@@ -24,7 +24,9 @@
   <% end %>
   <%= render partial: 'result', collection: @prospect.results %>
   <%= panel_footer do %>
-    <%= button 'Back', '#more', data: {target: '#more', toggle: 'collapse'}, size: 'sm', type: 'default', class: 'pull-right' %>
+    <%= row do %>
+      <%= button 'Back', '#more', data: {target: '#more', toggle: 'collapse'}, size: 'sm', type: 'default', class: 'pull-right' %>
     <% end %>
+  <% end %>
 <% end %>
 

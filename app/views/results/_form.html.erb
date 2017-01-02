@@ -52,18 +52,17 @@
       <%= f.label :disposition, 'Not Int' %>
     </div>
   </div>
-  <div id="event" class="collapse">
-    <div class="row">
-      <div class="form-group col-xs-12">
-        <%= f.label :event, 'Date & Time' %><br>
-        <div class="input-group">
-          <%= f.text_field :event, class: 'form-control datetime' %>
-          <span class="input-group-addon">
-              <span class="glyphicon glyphicon-calendar"></span>
-          </span>
-        </div>
+  <div class="row">
+    <div class="form-group col-xs-12">
+      <%= f.label :event, 'Date & Time' %><br>
+      <div class="input-group">
+        <%= f.text_field :event, class: 'form-control datetime' %>
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
       </div>
     </div>
+
   </div>
   <%= panel_footer do %>
     <a data-target="#result-form" class="btn btn-default round raised btn-sm" role="button" data-toggle="collapse">Back</a>
@@ -71,14 +70,28 @@
   <% end %>
 <% end %>
 <script type="text/javascript">
+  function setup() {
+    var val = $("input[name='result[disposition]']:checked", '#new_result').val()
+    if( val === 'appointment' || val === 'follow-up') {
+      $('#result_event').prop("disabled", false);
+    } else {
+      $('#result_event').prop("disabled", true);
+    }
+  }
+
+$( document ).ready(function() {
+  setup()
+  $('#result_event').prop("disabled", true);
   $('.datetime').datetimepicker();
+  $('input[type="radio"]').click(function() {
+    setup();
+  })
   <% if Rails.env.production? %>
-    window.onload = function() { document.myform.action = getLocationConstant(); } Does not work without ssl.
+    document.myform.action = getLocationConstant(); } // Does not work without ssl.
   <% else %>
-    $( document ).ready(function() {
       $('#Position1').val('27.961352,-82.472202')
       $('#Latitude').val('27.961352')
       $('#Longitude').val('-82.472202')
-    })
   <% end %>
+  })
 </script>

@@ -1,10 +1,10 @@
 # @Author: Robert D. Cotey II <coteyr@coteyr.net>
 # @Date:   2014-10-17 00:02:43
 # @Last Modified by:   Robert D. Cotey II <coteyr@coteyr.net>
-# @Last Modified time: 2016-12-27 15:13:24
+# @Last Modified time: 2017-01-02 07:34:17
 $usr = "staging"
 $password = ""
-$domain = "66.175.214.54"
+$domain = "staging.gosell.co"
 $branch = "master"
 
 

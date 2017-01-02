@@ -122,7 +122,16 @@
 
 
 <script type="text/javascript">
-  // window.onload = function() { document.myform.action = getLocationConstant(); } Does not work without ssl.
+<% if Rails.env.production? %>
+  window.onload = function() { document.myform.action = getLocationConstant(); } Does not work without ssl.
+<% else %>
+  $( document ).ready(function() {
+    $('#Position1').val('27.961352,-82.472202')
+    $('#Latitude').val('27.961352')
+    $('#Longitude').val('-82.472202')
+  })
+<% end %>
+
 </script>
 
 <% end %>

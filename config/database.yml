@@ -20,6 +20,17 @@ test:
   <<: *default
   database: db/test.sqlite3
 
+staging:
+  adapter: mysql2
+  database: staging
+  username: staging
+  password: staging
+  pool: 5
+  timeout: 5000
 production:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: mysql2
+  database:
+  username:
+  password:
+  pool: 5
+  timeout: 500

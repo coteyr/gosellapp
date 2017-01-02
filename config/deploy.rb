@@ -1,7 +1,7 @@
 # @Author: Robert D. Cotey II <coteyr@coteyr.net>
 # @Date:   2014-10-20 17:44:24
 # @Last Modified by:   Robert D. Cotey II <coteyr@coteyr.net>
-# @Last Modified time: 2017-01-02 07:54:58
+# @Last Modified time: 2017-01-02 08:07:28
 # config valid only for Capistrano 3.1
 # lock '3.2.1'
 
@@ -22,8 +22,8 @@ namespace :deploy do
     on roles(:worker), in: :sequence, wait: 5 do
 
       # upstart should restart these
-      invoke 'clockwork:stop'
-      invoke 'clockwork:start'
+      # invoke 'clockwork:stop'
+      # invoke 'clockwork:start'
       invoke 'delayed_job:restart'
     end
   end

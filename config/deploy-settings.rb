@@ -1,7 +1,7 @@
 # @Author: Robert D. Cotey II <coteyr@coteyr.net>
 # @Date:   2014-10-17 00:02:43
 # @Last Modified by:   Robert D. Cotey II <coteyr@coteyr.net>
-# @Last Modified time: 2016-12-27 15:12:25
+# @Last Modified time: 2017-01-02 07:55:11
 
 
 #setting file for deployment
@@ -42,7 +42,7 @@
 
 # Default value for linked_dirs is []
 
-set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads}
+set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads}
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }

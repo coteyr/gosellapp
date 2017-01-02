@@ -1,13 +1,14 @@
 # @Author: Robert D. Cotey II <coteyr@coteyr.net>
 # @Date:   2014-10-20 17:44:24
 # @Last Modified by:   Robert D. Cotey II <coteyr@coteyr.net>
-# @Last Modified time: 2016-12-27 15:11:19
+# @Last Modified time: 2017-01-02 07:54:58
 # config valid only for Capistrano 3.1
 # lock '3.2.1'
 
 require File.expand_path('../deploy-settings.rb', __FILE__)
 require File.expand_path('../deploy-custom.rb', __FILE__)
 
+set :bundle_binstubs, nil
 set :assets_dependencies, %w(app/assets lib/assets vendor/assets Gemfile.lock config/routes.rb)
 Rake::Task["deploy:assets:precompile"].clear_actions
 class PrecompileRequired < StandardError; end

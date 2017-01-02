@@ -51,7 +51,10 @@ class ProspectsController < ApplicationController
   end
 
   def create
+    @list = List.where(list_id: params[:list_number]).first_or_create
+    @list.save!
     @prospect = Prospect.new(prospect_params)
+    @prospect.list = @list
     respond_to do |format|
       if @prospect.save
         format.html { redirect_to @prospect, notice: 'New Prospect was successfully created.' }

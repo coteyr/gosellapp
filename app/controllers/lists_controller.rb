@@ -5,7 +5,12 @@ class ListsController < ApplicationController
   end
   def reset
     list = List.find params[:list_id]
-    list.prospects.update_all(called: false, canvassed: false)
+    for prospect in list.prospects
+      if prospect.results.where(disposition: %w(appointment follow-up not-qualified bad-record sale no-sale)).count == 0
+        prospect.update_column(:called, false)
+        prospect.update_column(:canvassed, false)
+      end
+    end
     redirect_to lists_path, notice: 'Prospects have been reset'
   end
   def destroy

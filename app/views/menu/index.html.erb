@@ -31,6 +31,9 @@
       <% if can? :create, Import %>
         <%= menu_button 'Imports', imports_path %>
       <% end %>
+      <% if can? :create, User %>
+        <%= menu_button 'User Management', users_path %>
+      <% end %>
     </div>
   <% end %>
 <% end %>

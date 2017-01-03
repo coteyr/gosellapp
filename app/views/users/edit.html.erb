@@ -1,0 +1,47 @@
+<% # @Author: Robert D. Cotey II <coteyr@coteyr.net> %>
+<% # @Date:   2017-01-03 11:28:27 %>
+<% # @Last Modified by:   Robert D. Cotey II <coteyr@coteyr.net> %>
+<% # @Last Modified time: 2017-01-03 11:28:27 %>
+
+<%= row do %>
+  <%= form_for @user do |f| %>
+    <%= render partial: 'layouts/errors', locals: {objekt: @user} %>
+    <%= well "Update Settings", size: 6, offset: 3 do %>
+      <div class="row">
+        <div class="form-group col-xs-12">
+          <%= f.label :first_name %><br />
+          <%= f.text_field :first_name, autofocus: true %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-xs-12">
+          <%= f.label :last_name %><br />
+          <%= f.text_field :last_name %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-xs-12">
+          <%= f.label :username %><br />
+          <%= f.text_field :username %>
+        </div>
+      </div>
+      <% if current_user.admin? %>
+        <div class="row">
+          <div class="form-group col-xs-12">
+            <%= f.label :permission_level %><br />
+            <%= f.select :permission_level, ['Normal', 'Manager', 'Admin'], selected: @user.permission_level, class: 'form-control' %>
+          </div>
+        </div>
+      <% end %>
+      <div class="row">
+        <div class="form-group col-xs-12">
+          <%= f.label :email %><br />
+          <%= f.email_field :email %>
+        </div>
+      </div>
+      <%= panel_footer do %>
+        <%= f.submit "Update", class: "btn btn-primary gradient raised round pull-right" %>
+        <% end %>
+    <% end %>
+  <% end %>
+<% end %>

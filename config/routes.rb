@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :users
   resources :lists do
     get :reset
   end
@@ -15,7 +16,7 @@ Rails.application.routes.draw do
     resources :results, only: [:create, :edit, :update, :destroy]
   end
 
-  devise_for :users, controllers: { registrations: 'registrations' }
+  devise_for :users, controllers: { registrations: 'registrations' }, path: 'u'
   root 'menu#index'
   get "menu" => "prospects#menu"
   get "update_accessible" => "results#update_accessible"

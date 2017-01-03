@@ -1,0 +1,27 @@
+<% # @Author: Robert D. Cotey II <coteyr@coteyr.net> %>
+<% # @Date:   2017-01-03 11:21:11 %>
+<% # @Last Modified by:   Robert D. Cotey II <coteyr@coteyr.net> %>
+<% # @Last Modified time: 2017-01-03 11:21:11 %>
+
+<%= row do %>
+  <%= well "User List" do %>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>User Name</th>
+          <th>Email</th>
+          <th>Permission Level</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render partial: 'user', collection: @users %>
+      </tbody>
+    </table>
+    <%= panel_footer do %>
+      <%= button 'Add User', new_user_path, type: 'primary', class: 'pull-right' %>
+    <% end %>
+  <% end %>
+<% end %>

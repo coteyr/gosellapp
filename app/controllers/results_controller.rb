@@ -7,8 +7,7 @@ class ResultsController < ApplicationController
     if @result.update_attributes result_params
       @note = @prospect.notes.new
       @note.detail = params[:note]
-      @note.detail = @result.disposition if @note.detail.blank?
-      @note.save(validate: false)
+      @note.save
       @prospect.update_column :canvassed, true if params[:go] == 'walk'
       @prospect.update_column :called, true if params[:go] == 'smile'
       redirect_to prospects_path(go: params[:go]), notice: 'Result was successfully posted.'

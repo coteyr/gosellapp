@@ -4,48 +4,23 @@
 <% # @Last Modified time: 2016-12-22 05:42:37 %>
 
 
-<div class="row">
+<%= row do %>
+  <%= well 'Background Tasks' do %>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Priority</th>
+        <th>Attempts</th>
+        <th>Run At</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: 'job', collection: @jobs %>
+    </tbody>
+  </table>
+  <% end %>
+<% end %>
 
-<div class="card">
-  <div class="card-block col-md-12">
-    <h4 class="card-title">Background Tasks</h4>
-    <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Priority</th>
-            <th>Attempts</th>
-            <th>Run At</th>
-            <th>Status</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <%= render partial: 'job', collection: @jobs %>
-        </tbody>
-      </table>
-  </div>
-</div>
-
-      <div class="container-fluid">
-        <div class="col-xs-12">
-          <br>
-          <table border="1" width="100%">
-            <tr background="black">
-              <th>UserID</th><th>Campaign</th><th>List#</th><th>Company</th>
-              <th>Co Phone</th><th>City</th><th>State</th><th>Full Name</th><th>Title</th>
-              <th colspan="2"></th>
-            </tr>
-
-
-          </table>
-        </div>
-
-
-
-      </div>
-
-
-    </div>
-  </div>
-</div>

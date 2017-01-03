@@ -73,8 +73,8 @@ class ProspectsController < ApplicationController
     if @prospect.update_attributes(prospect_params)
       @prospect.update_column :canvassed, true if params[:go] == 'walk'
       @prospect.update_column :called, true if params[:go] == 'smile'
-      # redirect_to @prospect if params[:go] #
-      redirect_to prospects_path(go: params[:go])  #unless params[:go]
+      redirect_to prospect_path(@prospect, go: params[:go])
+      #redirect_to prospects_path(go: params[:go])  #unless params[:go]
     else
       render :show
     end

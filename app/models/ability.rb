@@ -14,6 +14,7 @@ class Ability
     if user.normal? or user.manager?
       can :show, user
       can [:read, :edit], Prospect
+      can [:read, :reset], List
     end
 
     # Define abilities for the passed in user here. For example:

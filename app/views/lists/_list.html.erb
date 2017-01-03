@@ -11,5 +11,9 @@
   <td><%= list.prospects.canvassed.count %></td>
   <td><%= list.prospects.called.count %></td>
   <td><%= button 'reset', list_reset_path(list), data: {confirm: 'Are you sure?'} %></td>
-  <td><%= button 'delete', list_path(list), data: {confirm: 'Are you sure? This will delete the prospects on the list as well.', method: 'delete'} %></td>
+  <td>
+    <% if can? :delete, List %>
+      <%= button 'delete', list_path(list), data: {confirm: 'Are you sure? This will delete the prospects on the list as well.', method: 'delete'} %>
+    <% end %>
+  </td>
 </tr>

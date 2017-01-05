@@ -7,65 +7,23 @@
   <%= form_for @user do |f| %>
     <%= render partial: 'layouts/errors', locals: {objekt: @user} %>
     <%= well "Create User", size: 6, offset: 3 do %>
-      <div class="row">
-        <div class="form-group col-xs-12">
-          <%= f.label :first_name %><br />
-          <%= f.text_field :first_name, autofocus: true %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-xs-12">
-          <%= f.label :last_name %><br />
-          <%= f.text_field :last_name %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-xs-12">
-          <%= f.label :username %><br />
-          <%= f.text_field :username %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-xs-12">
-          <%= f.label :password %><br />
-          <%= f.text_field :password %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-xs-12">
-          <%= f.label :password_confirmation %><br />
-          <%= f.text_field :password_confirmation %>
-        </div>
-      </div>
+      <%= f.text_field :first_name, autofocus: true %>
+      <%= f.text_field :last_name %>
+      <%= f.text_field :username %>
+      <%= f.password_field :password %>
+      <%= f.password_field :password_confirmation %>
       <% if current_user.admin? %>
-        <div class="row">
-          <div class="form-group col-xs-12">
-            <%= f.label :group %><br />
-            <%= f.select :group_id, @groups.map{ |g| [g.name, g.id] } , selected: @user.group_id, class: 'form-control' %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="form-group col-xs-12">
-            <%= f.label :permission_level %><br />
-            <%= f.select :permission_level, ['Normal', 'Manager', 'Admin'], selected: @user.permission_level, class: 'form-control' %>
-          </div>
-        </div>
+        <%= f.select :group_id, @groups.map{ |g| [g.name, g.id] } , selected: @user.group_id, class: 'form-control' %>
+        <%= f.select :permission_level, ['Normal', 'Manager', 'Admin'], selected: @user.permission_level, class: 'form-control' %>
       <% end %>
       <% if current_user.manager? %>
-        <div class="row">
-          <div class="form-group col-xs-12">
-            <%= f.label :permission_level %><br />
-            <%= f.select :permission_level, ['Normal', 'Manager'], selected: @user.permission_level, class: 'form-control' %>
+        <%= f.select :permission_level, ['Normal', 'Manager'], selected: @user.permission_level, class: 'form-control' %>
           </div>
         </div>
         <%= f.hidden_field :group_id, value: current_user.group_id %>
       <% end %>
-      <div class="row">
-        <div class="form-group col-xs-12">
-          <%= f.label :email %><br />
-          <%= f.email_field :email %>
-        </div>
-      </div>
+      <%= f.text_field :email %>
+
       <%= panel_footer do %>
         <%= f.submit "Update", class: "btn btn-primary gradient raised round pull-right" %>
         <% end %>

@@ -1,5 +1,5 @@
 class ProspectsController < ApplicationController
-  before_action :set_prospect, only: [:show, :edit, :edit_contacts, :update, :destroy]
+  #before_action :set_prospect, only: [:show, :edit, :edit_contacts, :update, :destroy]
   skip_before_action :verify_authenticity_token
   before_filter :authenticate_user!
   load_and_authorize_resource
@@ -49,34 +49,40 @@ class ProspectsController < ApplicationController
 
   def new
     @prospect = Prospect.new
+    @lists = current_user.lists
   end
 
   def create
-    @list = List.where(list_id: params[:list_number]).first_or_create
-    @list.save!
+    #@list = List.where(list_id: params[:list_number]).first_or_create
+   # @list.save!
+   #@list = current_user.lists.find params[:prospect][:list_id]
     @prospect = Prospect.new(prospect_params)
-    @prospect.list = @list
+    #@prospect.list = @list
     respond_to do |format|
       if @prospect.save
         format.html { redirect_to @prospect, notice: 'New Prospect was successfully created.' }
       else
+        @lists = current_user.lists
         format.html { render :new }
       end
     end
   end
 
   def edit
+    @prospect = current_user.prospects.find params[:id]
+    @lists = current_user.lists
   end
 
   def update
-    @prospect = Prospect.find params[:id]
+    @prospect = current_user.prospects.find params[:id]
     if @prospect.update_attributes(prospect_params)
-      @prospect.update_column :canvassed, true if params[:go] == 'walk'
-      @prospect.update_column :called, true if params[:go] == 'smile'
+      # @prospect.update_column :canvassed, true if params[:go] == 'walk'
+      # @prospect.update_column :called, true if params[:go] == 'smile'
       redirect_to prospect_path(@prospect, go: params[:go])
       #redirect_to prospects_path(go: params[:go])  #unless params[:go]
     else
       render :show
+      @lists = current_user.lists
     end
   end
 
@@ -100,14 +106,14 @@ class ProspectsController < ApplicationController
 
 
 private
-  def set_prospect
-    @prospect = Prospect.find(params[:id])
-  end
+  #def set_prospect
+  #  @prospect = Prospect.find(params[:id])
+  #end
 
   def prospect_params
     params
         .require(:prospect)
-        .permit(:campaign, :list_number, :time_on_contact, :status, :source,
+        .permit(:campaign, :list_number, :list_id, :group_id, :time_on_contact, :status, :source,
                 :company, :company_phone, :address, :address2, :city, :state,
                 :zip, :county, :fax, :website, :numberofemployees, :first_name,
                 :last_name, :title, :phone, :m_phone, :email, :alt_email,

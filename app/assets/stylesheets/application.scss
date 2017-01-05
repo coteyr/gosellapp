@@ -26,7 +26,9 @@ body {
 .navbar-brand {
   padding: 3px 15px;
 }
-
+label {
+  text-transform: capitalize;
+}
 #footer .navbar {
   min-height:20px !important;
   max-height: 21px;
@@ -89,3 +91,5 @@ text-align: center;
 
 /*reduce text size on mobile devices*/
 @media (max-width: 768px) { #mobile-text { font-size: .8em;}}
+
+

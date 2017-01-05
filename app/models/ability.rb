@@ -16,7 +16,7 @@ class Ability
     end
     if user.normal? or user.manager?
       can :show, user
-      can [:read, :edit], Prospect
+      can [:read, :edit, :create], Prospect
       can [:read, :reset], List
     end
 

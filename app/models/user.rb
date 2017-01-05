@@ -7,7 +7,7 @@ class User < ApplicationRecord
   validates :group_id, presence: true
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  has_many :prospects, through: :lists
+  has_many :prospects
   has_many :results, through: :prospects
   has_many :lists, through: :group
   belongs_to :group

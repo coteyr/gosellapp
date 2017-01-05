@@ -22,5 +22,8 @@
         <%= render partial: 'list', collection: @lists %>
       </tbody>
     </table>
+    <%= panel_footer do %>
+      <%= button 'import csv', new_import_path, type: 'primary', class: 'pull-right' %>
+    <% end %>
   <% end %>
 <% end %>

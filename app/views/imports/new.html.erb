@@ -3,10 +3,18 @@
 <% # @Last Modified by:   Robert D. Cotey II <coteyr@coteyr.net> %>
 <% # @Last Modified time: 2016-12-22 12:29:36 %>
 
-<%= form_for @import, multipart: true, class: 'form-inline' do |f| %>
-  <%= field_set_tag 'Upload CSV' do %>
-    <%= f.hidden_field :user_id, value: current_user.id %>
-    <%= f.file_field :data %>
-    <%= f.submit 'Submit' %>
+
+<%= row do %>
+<%= render partial: 'layouts/errors', locals: {objekt: @import} %>
+  <%= well 'Upload CSV' do %>
+    <%= form_for @import, multipart: true, class: 'form-inline' do |f| %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+      <%= f.hidden_field :group_id, value: current_user.group_id %>
+      <%= f.file_field :data %>
+      <%= f.hidden_field :data_cache %>
+      <%= panel_footer do %>
+        <%= f.submit 'Submit', class: 'pull-right' %>
+      <% end %>
+    <% end %>
   <% end %>
 <% end %>

@@ -1,7 +1,8 @@
 class ListsController < ApplicationController
   load_and_authorize_resource
   def index
-    @lists = List.all
+    @lists = current_user.lists
+    # @lists = List.all if current_user.admin?
   end
   def reset
     list = List.find params[:list_id]

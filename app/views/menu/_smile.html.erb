@@ -10,7 +10,7 @@
     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu dropdown-menu-right">
-    <% @goList.each do |p| %>
+    <% @lists.each do |p| %>
       <li><%= link_to "#{p.list_id}", prospects_path(list_id: p.id, go: 'smile') %></li>
     <% end %>
   </ul>

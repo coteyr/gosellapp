@@ -5,5 +5,6 @@ class MenuController < ApplicationController
     session[:co]  = nil
     session[:phon] = nil
     session[:list_id] = nil
+    @lists = current_user.lists
   end
 end

@@ -34,6 +34,9 @@
       <% if can? :create, User %>
         <%= menu_button 'User Management', users_path %>
       <% end %>
+      <% if can? :create, Group %>
+        <%= menu_button 'Group Management', groups_path %>
+      <% end %>
     </div>
   <% end %>
 <% end %>

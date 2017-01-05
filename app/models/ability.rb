@@ -10,6 +10,9 @@ class Ability
       can :manage, Import
       can :manage, List
       can :manage, Prospect
+      can :manage, User do |u|
+        u.group_id == user.group_id and u.permission_level != 'Admin'
+      end
     end
     if user.normal? or user.manager?
       can :show, user

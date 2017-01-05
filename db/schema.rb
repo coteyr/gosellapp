@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170101161441) do
+ActiveRecord::Schema.define(version: 20170105172504) do
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -27,18 +27,26 @@ ActiveRecord::Schema.define(version: 20170101161441) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
+  create_table "groups", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "imports", force: :cascade do |t|
     t.integer  "user_id"
     t.text     "data"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.string   "status",     default: "pending"
+    t.integer  "group_id"
   end
 
   create_table "lists", force: :cascade do |t|
     t.string   "list_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "group_id"
   end
 
   create_table "notes", force: :cascade do |t|
@@ -114,6 +122,7 @@ ActiveRecord::Schema.define(version: 20170101161441) do
     t.datetime "locked_at"
     t.integer  "list_id"
     t.integer  "locked_by_id"
+    t.integer  "group_id"
     t.index ["user_id"], name: "index_prospects_on_user_id"
   end
 
@@ -150,6 +159,7 @@ ActiveRecord::Schema.define(version: 20170101161441) do
     t.string   "last_name"
     t.string   "phone"
     t.string   "permission_level"
+    t.integer  "group_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true

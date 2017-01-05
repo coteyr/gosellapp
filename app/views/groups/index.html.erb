@@ -1,0 +1,27 @@
+<% # @Author: Robert D. Cotey II <coteyr@coteyr.net> %>
+<% # @Date:   2017-01-05 11:41:48 %>
+<% # @Last Modified by:   Robert D. Cotey II <coteyr@coteyr.net> %>
+<% # @Last Modified time: 2017-01-05 11:41:48 %>
+
+<%= row do %>
+  <%= well "Group List" do %>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Managers</th>
+          <th>Users</th>
+          <th>Lists</th>
+          <th>Prospects</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render partial: 'group', collection: @groups %>
+      </tbody>
+    </table>
+    <%= panel_footer do %>
+      <%= button 'Add Group', new_group_path, type: 'primary', class: 'pull-right' %>
+    <% end %>
+  <% end %>
+<% end %>

@@ -1,0 +1,21 @@
+<% # @Author: Robert D. Cotey II <coteyr@coteyr.net> %>
+<% # @Date:   2017-01-03 11:52:37 %>
+<% # @Last Modified by:   Robert D. Cotey II <coteyr@coteyr.net> %>
+<% # @Last Modified time: 2017-01-03 11:52:37 %>
+
+<%= row do %>
+  <%= form_for @group do |f| %>
+    <%= render partial: 'layouts/errors', locals: {objekt: @group} %>
+    <%= well "Group Settings", size: 6, offset: 3 do %>
+      <div class="row">
+        <div class="form-group col-xs-12">
+          <%= f.label :name %><br />
+          <%= f.text_field :name, autofocus: true %>
+        </div>
+      </div>
+      <%= panel_footer do %>
+        <%= f.submit "Update", class: "btn btn-primary gradient raised round pull-right" %>
+        <% end %>
+    <% end %>
+  <% end %>
+<% end %>

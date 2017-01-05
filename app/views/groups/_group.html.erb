@@ -1,0 +1,13 @@
+<% # @Author: Robert D. Cotey II <coteyr@coteyr.net> %>
+<% # @Date:   2017-01-05 11:43:03 %>
+<% # @Last Modified by:   Robert D. Cotey II <coteyr@coteyr.net> %>
+<% # @Last Modified time: 2017-01-05 11:43:03 %>
+
+<tr>
+  <td><%= group.name %></td>
+  <td><%= group.users.managers.count %></td>
+  <td><%= group.users.normal.count %></td>
+  <td><%= group.lists.count %></td>
+  <td><%= group.prospects.count %></td>
+  <td><%= button 'edit', edit_group_path(group) %></td>
+</tr>

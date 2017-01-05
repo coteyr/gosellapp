@@ -1,7 +1,7 @@
 # @Author: Robert D. Cotey II <coteyr@coteyr.net>
 # @Date:   2016-12-22 06:04:20
 # @Last Modified by:   Robert D. Cotey II <coteyr@coteyr.net>
-# @Last Modified time: 2017-01-01 10:11:59
+# @Last Modified time: 2017-01-05 12:35:55
 
 Delayed::Worker.destroy_failed_jobs = false
 Delayed::Worker.sleep_delay = 60

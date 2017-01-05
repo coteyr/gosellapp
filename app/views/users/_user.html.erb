@@ -8,6 +8,19 @@
   <td><%= user.username %></td>
   <td><%= user.email %></td>
   <td><%= user.permission_level %></td>
-  <td><%= button 'edit', edit_user_path(user) %></td>
-  <td><%= button 'delete', user_path(user), data: { method: 'delete', confirm: 'Are you sure?' } %></td>
+  <td>
+    <% if can? :edit, user %>
+      <%= button 'edit', edit_user_path(user) %>
+    <% end %>
+  </td>
+  <td>
+    <% if can? :delete, user %>
+      <%= button 'delete', user_path(user), data: { method: 'delete', confirm: 'Are you sure?' } %>
+    <% end %>
+  </td>
+  <% if current_user.admin? %>
+    <td>
+      <%= button 'become', user_become_path(user) %>
+    </td>
+  <% end %>
 </tr>

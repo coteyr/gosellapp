@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :users
+  resources :groups
+  resources :users do
+    get :become
+  end
   resources :lists do
     get :reset
   end

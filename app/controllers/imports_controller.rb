@@ -12,12 +12,13 @@ class ImportsController < ApplicationController
     end
   end
   def index
+    @imports = current_user.group.imports
     @imports = Import.all
   end
 
 private
   def allowed_params
     # params.require(:location)
-    params.permit(import: [:id, :data, :user_id])
+    params.permit(import: [:id, :data, :user_id, :group_id])
   end
 end

@@ -2,12 +2,18 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   validates :username, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true
   validates :permission_level, presence: true, inclusion: {in: ['Normal', 'Manager', 'Admin']}
+  validates :group_id, presence: true
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  has_many :prospects
+  has_many :prospects, through: :lists
   has_many :results, through: :prospects
+  has_many :lists, through: :group
+  belongs_to :group
   before_create :set_normal_user
+  scope :managers, -> { where(permission_level: 'Manager') }
+  scope :normal, -> { where(permission_level: 'Normal') }
 
   def name
     "#{first_name} #{last_name}"

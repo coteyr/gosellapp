@@ -40,10 +40,25 @@
       <% if current_user.admin? %>
         <div class="row">
           <div class="form-group col-xs-12">
+            <%= f.label :group %><br />
+            <%= f.select :group_id, @groups.map{ |g| [g.name, g.id] } , selected: @user.group_id, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-xs-12">
             <%= f.label :permission_level %><br />
             <%= f.select :permission_level, ['Normal', 'Manager', 'Admin'], selected: @user.permission_level, class: 'form-control' %>
           </div>
         </div>
+      <% end %>
+      <% if current_user.manager? %>
+        <div class="row">
+          <div class="form-group col-xs-12">
+            <%= f.label :permission_level %><br />
+            <%= f.select :permission_level, ['Normal', 'Manager'], selected: @user.permission_level, class: 'form-control' %>
+          </div>
+        </div>
+        <%= f.hidden_field :group_id, value: current_user.group_id %>
       <% end %>
       <div class="row">
         <div class="form-group col-xs-12">
